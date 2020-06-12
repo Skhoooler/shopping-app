@@ -4,7 +4,8 @@ import java.util.Map;
 
 public class ShopFaceControl {
 
-    private Map<String, Product> data;
+    private Map<String, Product> rawData;
+    private Map<String, Product> sortedData;
     private int index;
 
 
@@ -12,6 +13,10 @@ public class ShopFaceControl {
 
     }
 
+    /**
+     * Sorts the raw data that comes from the ShopFaceModel Class into a second
+     * map that contains the best results from the search.
+     */
     private void sort(){
 
     }
