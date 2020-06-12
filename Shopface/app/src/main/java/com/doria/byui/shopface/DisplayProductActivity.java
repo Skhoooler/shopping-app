@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 
 public class DisplayProductActivity extends AppCompatActivity {
-    public ShopFaceView displayProducts(String query);
+    public ShopFaceView displayProducts(String query){
+        ShopFaceView view1 = null;
+        return view1;
+    }
 
     public Product getProduct() {
         return product;

@@ -7,7 +7,10 @@ import android.view.View;
 
 public class DisplayResultsActivity extends AppCompatActivity {
 
-    public ShopFaceView displayProducts(String query);
+    public ShopFaceView displayProducts(String query){
+        ShopFaceView view1 = null;
+        return view1;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
