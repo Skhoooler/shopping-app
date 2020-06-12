@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Shopface</string>
+    <string name="search_bar">Product</string>
+    <string name="search_button">Search</string>
 </resources>
