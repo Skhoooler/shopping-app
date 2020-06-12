@@ -2,7 +2,7 @@ package com.doria.byui.shopface;
 
 import java.util.Map;
 
-class ShopFaceModel {
+class ShopFaceModel extends Connect{
     Map<String, Product> data;
 
     ShopFaceModel(String query){
