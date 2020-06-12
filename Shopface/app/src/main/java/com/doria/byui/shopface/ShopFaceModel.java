@@ -6,10 +6,8 @@ class ShopFaceModel extends Connect{
     Map<String, Product> data;
 
     ShopFaceModel(String query){
-        super();
 
     }
-
 
     /**
      * Not sure what we were thinking with this one
