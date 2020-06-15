@@ -3,7 +3,9 @@ package com.doria.byui.shopface;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +21,9 @@ public class MainActivity extends AppCompatActivity {
         //uiThread functions
     }
 
-    void onClick(View view){
-        //search button
+    public void SearchOnClick(View view){
+        EditText searchBox = (EditText)findViewById(R.id.editText);
+        String query = searchBox.getText().toString();
+        Search search = new Search(query);
     }
 }
