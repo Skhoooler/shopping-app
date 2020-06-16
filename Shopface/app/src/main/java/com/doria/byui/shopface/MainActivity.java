@@ -2,6 +2,8 @@ package com.doria.byui.shopface;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.View;
@@ -15,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);//when created what needs to be done?
 
         super.onPause();//when paused what needs to be done?
+
     }
 
     void uiThread(){
