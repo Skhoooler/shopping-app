@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);//when created what needs to be done?
         sharedPreferences = getSharedPreferences(queryStore, Context.MODE_PRIVATE);
         super.onPause();//when paused what needs to be done?
+        super.onStop(DeleteOnStop());
         //get(null);
     }
 
@@ -38,5 +39,8 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
         System.out.println(sharedPreferences.getString(queryKey, ""));
         Search search = new Search(query);
+    }
+    public  DeleteOnStop(){
+
     }
 }
