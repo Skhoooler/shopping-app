@@ -11,16 +11,19 @@ import android.text.Layout;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.jar.Attributes;
+
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
-
+    public static final String queryKey = "key";
+    public static final String queryStore = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);//when created what needs to be done?
-
+        sharedPreferences = getSharedPreferences(queryStore, Context.MODE_PRIVATE);
         super.onPause();//when paused what needs to be done?
-
+        //get(null);
     }
 
     void uiThread(){
@@ -30,8 +33,9 @@ public class MainActivity extends AppCompatActivity {
     public void SearchOnClick(View view){
         EditText searchBox = (EditText)findViewById(R.id.editText);
         String query = searchBox.getText().toString();
-        sharedPreferences = getSharedPreferences(query, Context.MODE_PRIVATE);
-        System.out.println(sharedPreferences.getString(query, ""));
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(queryKey, query);
+        System.out.println(sharedPreferences.getString(queryKey, ""));
         Search search = new Search(query);
     }
 }
