@@ -10,7 +10,8 @@ public class ShopFaceModelTest {
 
     @Test
     public void dataInMapTest() throws NoSuchFieldException {
-        ShopFaceModel shopFaceModel = new ShopFaceModel();
+        String hi = "hi";
+        ShopFaceModel shopFaceModel = new ShopFaceModel(hi);
         Field data = ShopFaceModel.class.getDeclaredField("data");
         data.setAccessible(true);
 

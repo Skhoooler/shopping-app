@@ -8,7 +8,8 @@ public class SearchTest {
 
     @Test
     public void searchQueryTest() throws NoSuchFieldException {
-        Search tester = new Search();
+        String hi = "hi";
+        Search tester = new Search(hi);
         Field query = Search.class.getDeclaredField("query");
         query.setAccessible(true);
 
