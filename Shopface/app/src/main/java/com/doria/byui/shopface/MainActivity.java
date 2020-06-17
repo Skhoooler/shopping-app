@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         String query = searchBox.getText().toString();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(queryKey, query);
+        editor.commit();
         System.out.println(sharedPreferences.getString(queryKey, ""));
         Search search = new Search(query);
     }
