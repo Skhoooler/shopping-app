@@ -33,13 +33,13 @@
         app:layout_constraintStart_toEndOf="@+id/editText" />
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/tile_background"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="drawable-xhdpi/tile_background.xml"
+        android:gravity="center_horizontal"
+        >
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
