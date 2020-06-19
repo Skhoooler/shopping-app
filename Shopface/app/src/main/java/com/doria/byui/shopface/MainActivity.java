@@ -21,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);//when created what needs to be done?
-        sharedPreferences = getSharedPreferences(queryStore, Context.MODE_PRIVATE);
+        //sharedPreferences = getSharedPreferences(queryStore, Context.MODE_PRIVATE);
         super.onPause();//when paused what needs to be done?
-        super.onStop(DeleteOnStop());
+        //super.onStop(DeleteOnStop());
         //get(null);
     }
 
@@ -34,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
     public void SearchOnClick(View view){
         EditText searchBox = (EditText)findViewById(R.id.editText);
         String query = searchBox.getText().toString();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(queryKey, query);
-        editor.commit();
-        System.out.println(sharedPreferences.getString(queryKey, ""));
+        //SharedPreferences.Editor editor = sharedPreferences.edit();
+        //editor.putString(queryKey, query);
+        //editor.commit();
+        //System.out.println(sharedPreferences.getString(queryKey, ""));
         Search search = new Search(query);
     }
     public  void DeleteOnStop(){
