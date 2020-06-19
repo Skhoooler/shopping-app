@@ -14,8 +14,9 @@ class Search {
 
     Search(String query){
         this.query = query;
-        //System.out.println(query);
+        System.out.println(query);
         Connect connect  = new Connect(query);
+
     }
 
 }
