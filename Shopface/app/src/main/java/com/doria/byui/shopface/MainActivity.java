@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(sharedPreferences.getString(queryKey, ""));
         Search search = new Search(query);
     }
-    public  DeleteOnStop(){
+    public  void DeleteOnStop(){
 
     }
 }
