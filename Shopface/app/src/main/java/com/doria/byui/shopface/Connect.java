@@ -1,5 +1,6 @@
 package com.doria.byui.shopface;
 
+import com.ebay.services.finding.*;
 import java.util.Map;
 
 class Connect {
