@@ -9,6 +9,7 @@ class Connect {
     String query;
 
     Connect(String queryFromSearchBar){
+        queryFromSearchBar = query;
 
     }
 
@@ -21,6 +22,8 @@ class Connect {
      * @return a map with the raw data from the connect interface
      */
     Map<String, Product> getAllData(){
+        EbayConnect ebayConnect = new EbayConnect();
+        ebayConnect.search(query, true);
 
         return null;
     }
