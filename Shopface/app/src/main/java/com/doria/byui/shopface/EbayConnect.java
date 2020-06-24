@@ -2,6 +2,10 @@ package com.doria.byui.shopface;
 
 import com.ebay.services.finding.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class EbayConnect implements ConnectStore{
@@ -37,19 +41,25 @@ public class EbayConnect implements ConnectStore{
      * part of the API call
      * @return a String that is appended to the end of the API call
      */
-    private String getPayloadString(){
-        String ack    = "&Ack";                                                                     // Returns whether or not the API call was successful
-        String result = "&"
+    private String getPayloadString() {
+        String keywords = "";
 
-        return null;
+        try {
+            keywords = URLEncoder.encode(query, StandardCharsets.UTF_8.toString());              // Encodes the query into URL format
+        }catch (UnsupportedEncodingException exception){
+            throw new RuntimeException(exception.getCause());
+        }
+
+        String URL = keywords;
+
+        return URL;
     }
 
     /**
      * Constructs the correct API call URL to be able to send it off
      * @return the URL to the API as a fully concatenated string
      */
-    private String constructAPICall(String opName)
-    {
+    private String constructAPICall(String opName) {
         String base          = "https://svcs.sandbox.ebay.com/services/search/FindingService/v1";
         String operationName = "?OPERATION-NAME=";                                               // Required
         String appName       = "&SECURITY-APPNAME=";                                             // Required
