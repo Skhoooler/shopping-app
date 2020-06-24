@@ -12,7 +12,6 @@ public class ShopFaceControl {
 
     ShopFaceControl(String query){
 
-
     }
 
     /**
