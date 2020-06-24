@@ -7,9 +7,11 @@ public class ShopFaceControl {
     private Map<String, Product> rawData;
     private Map<String, Product> sortedData;
     private int index;
+    public String query;
 
 
     ShopFaceControl(String query){
+
 
     }
 
@@ -26,8 +28,10 @@ public class ShopFaceControl {
      * @return a map with the data that resulted from the search query
      */
     public Map<String, Product> getData(){
+        ShopFaceModel shopFaceModel = new ShopFaceModel(query);
+        rawData = shopFaceModel.getMapData(query);
 
-        return null;
+        return rawData;
     }
 
     /**

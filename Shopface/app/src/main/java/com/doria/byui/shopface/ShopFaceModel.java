@@ -6,13 +6,14 @@ class ShopFaceModel extends Connect{
     Map<String, Product> data;
 
     ShopFaceModel(String query){
-
+        //Connect connect = new Connect(query);
+        //data = connect.getAllData();
+        data = null;
     }
 
-    /**
-     * Not sure what we were thinking with this one
-     */
-    public void search(){
-
+    Map<String, Product> getMapData(String query){
+        Connect connect = new Connect(query);
+        data = connect.getAllData();
+        return data;
     }
 }
