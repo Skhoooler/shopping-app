@@ -2,9 +2,15 @@ package com.doria.byui.shopface;
 
 import com.ebay.services.finding.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.net.URLEncoder;
-
+import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
@@ -20,18 +26,45 @@ public class EbayConnect implements ConnectStore{
     }
 
 
-    public Map<Integer, Product> search(String incomingQuery, boolean sandbox){
+    public Map<Integer, Product> search(String incomingQuery, boolean sandbox) {
         query = incomingQuery;
 
-        String URL = "";
+        String ebayRequest = "";
         String opName = "findItemsByKeywords";
 
-        if (sandbox){
-            URL = constructSandboxAPICall(opName);
+        // Puts together the API request
+        if (sandbox) {
+            ebayRequest = constructSandboxAPICall(opName);
+        } else {
+            ebayRequest = constructAPICall(opName);
         }
-        else {
-            URL = constructAPICall(opName);
+
+
+        String rawEbayData = "<Call failed>";
+        // This is where the actual call is sent
+        try {
+            URL url = new URL(ebayRequest);
+            HttpURLConnection ebayConnection = (HttpURLConnection) url.openConnection();
+            ebayConnection.setRequestMethod("GET");
+
+            int status = ebayConnection.getResponseCode();
+
+            BufferedReader inputBuffer = new BufferedReader(
+                    new InputStreamReader(ebayConnection.getInputStream()));
+            StringBuilder ebayStringBuilder = new StringBuilder();
+
+            while((rawEbayData = inputBuffer.readLine()) != null){
+                ebayStringBuilder.append(rawEbayData);
+            }
+
+            inputBuffer.close();
+            ebayConnection.disconnect();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
         return null;
     }
 
