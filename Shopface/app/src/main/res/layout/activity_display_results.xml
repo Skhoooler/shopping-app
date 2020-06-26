@@ -10,22 +10,24 @@
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
+        android:hint="@string/search_button"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="@string/search_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.112" />
+        app:layout_constraintVertical_bias="0.097" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:text="Button"
+        android:text="@string/search_button"
         app:layout_constraintBaseline_toBaselineOf="@+id/editText2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.105"
@@ -34,14 +36,43 @@
     <ScrollView
         android:layout_width="409dp"
         android:layout_height="605dp"
-        android:layout_marginTop="144dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@tools:sample/backgrounds/scenic"
+                android:contentDescription="TODO" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
