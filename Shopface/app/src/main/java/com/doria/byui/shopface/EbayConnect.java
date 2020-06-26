@@ -45,6 +45,8 @@ public class EbayConnect implements ConnectStore{
             URL url = new URL(ebayRequest);
             HttpURLConnection ebayConnection = (HttpURLConnection) url.openConnection();
             ebayConnection.setRequestMethod("GET");
+            ebayConnection.setConnectTimeout(5000);
+            ebayConnection.setReadTimeout(5000);
 
             int status = ebayConnection.getResponseCode();
 

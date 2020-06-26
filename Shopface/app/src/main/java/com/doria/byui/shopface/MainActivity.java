@@ -33,12 +33,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void SearchOnClick(View view){
         EditText searchBox = (EditText)findViewById(R.id.editText);
-        String query = searchBox.getText().toString();
+        final String query = searchBox.getText().toString();
         //SharedPreferences.Editor editor = sharedPreferences.edit();
         //editor.putString(queryKey, query);
         //editor.commit();
         //System.out.println(sharedPreferences.getString(queryKey, ""));
-        Search search = new Search(query);
+
+        Thread connectThread = new Thread(new Runnable() {
+            @Override
+            public void run(){
+                Search search = new Search(query);
+            }
+        });
+        connectThread.start();
     }
     public  void DeleteOnStop(){
 
