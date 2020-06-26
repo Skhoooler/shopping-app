@@ -39,7 +39,7 @@ public class EbayConnect implements ConnectStore{
 
         System.out.println(ebayRequest);
 
-        String rawEbayData = "";
+
         // This is where the actual call is sent
         try {
             URL url = new URL(ebayRequest);
@@ -54,18 +54,22 @@ public class EbayConnect implements ConnectStore{
                     new InputStreamReader(ebayConnection.getInputStream()));
             StringBuilder ebayStringBuilder = new StringBuilder();
 
+            String rawEbayData = "";
             while((rawEbayData = inputBuffer.readLine()) != null){
                 ebayStringBuilder.append(rawEbayData);
+               // System.out.println("raw ebay data: " + rawEbayData);
             }
 
             inputBuffer.close();
             ebayConnection.disconnect();
 
+            String responseString = ebayStringBuilder.toString();
+            System.out.println(responseString);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println(rawEbayData);
+
         return null;
     }
 
