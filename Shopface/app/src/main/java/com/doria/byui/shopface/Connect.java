@@ -9,8 +9,10 @@ class Connect {
     String query;
 
     Connect(String queryFromSearchBar){
-        queryFromSearchBar = query;
+        query = queryFromSearchBar;
 
+        EbayConnect ebayConnect = new EbayConnect();
+        ebayConnect.search(query, true);
     }
 
     Connect() {

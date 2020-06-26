@@ -1,13 +1,11 @@
 package com.doria.byui.shopface;
 
-import com.ebay.services.finding.*;
+//import com.ebay.services.finding.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.net.HttpURLConnection;
@@ -29,7 +27,7 @@ public class EbayConnect implements ConnectStore{
     public Map<Integer, Product> search(String incomingQuery, boolean sandbox) {
         query = incomingQuery;
 
-        String ebayRequest = "";
+        String ebayRequest;
         String opName = "findItemsByKeywords";
 
         // Puts together the API request
@@ -39,8 +37,9 @@ public class EbayConnect implements ConnectStore{
             ebayRequest = constructAPICall(opName);
         }
 
+        System.out.println(ebayRequest);
 
-        String rawEbayData = "<Call failed>";
+        String rawEbayData = "";
         // This is where the actual call is sent
         try {
             URL url = new URL(ebayRequest);
@@ -64,7 +63,7 @@ public class EbayConnect implements ConnectStore{
             e.printStackTrace();
         }
 
-
+        System.out.println(rawEbayData);
         return null;
     }
 
@@ -75,7 +74,7 @@ public class EbayConnect implements ConnectStore{
      * @return a String that is appended to the end of the API call
      */
     private String getPayloadString() {
-        String keywords = "";
+        String keywords;
 
         try {
             keywords = URLEncoder.encode(query, StandardCharsets.UTF_8.toString());              // Encodes the query into URL format
@@ -83,7 +82,7 @@ public class EbayConnect implements ConnectStore{
             throw new RuntimeException(exception.getCause());
         }
 
-        String URL = keywords;
+        String URL = "&keywords=" + keywords;
 
         return URL;
     }
