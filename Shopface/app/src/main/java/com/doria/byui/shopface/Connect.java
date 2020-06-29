@@ -1,12 +1,20 @@
 package com.doria.byui.shopface;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.ebay.services.finding.*;
+
+import java.sql.Array;
+import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 class Connect {
     // String is the name of the product
     Map<String, Product> rawData;
     String query;
+    public Product[] ebayResults;
 
     Connect(String queryFromSearchBar){
         query = queryFromSearchBar;
@@ -25,7 +33,8 @@ class Connect {
      */
     Map<String, Product> getAllData(){
         EbayConnect ebayConnect = new EbayConnect();
-        ebayConnect.search(query, true);
+        Map<Integer,Product> ebaySearch = ebayConnect.search(query, true);
+        search(ebaySearch);
 
         return null;
     }
@@ -33,9 +42,16 @@ class Connect {
     /**
      * Queries the different APIs to get the top 10 results from each website and puts
      * it in a map
+     * //@param //ebaySearch
      */
-    void search(){
+    void search(Map<Integer, Product> ebaySearch){
 
+        ebayResults = new Product[10];
+        ;
+        for  (Integer i = 0; i<10; i++)
+        {
+            ebayResults[i] = ebaySearch.get(i);
+        }
     }
 
     /**
@@ -58,15 +74,15 @@ class Connect {
      * Deserializes the information from JSON to a Product object
      * @return a Product object with the information stored in it
      */
-    Product deserializeJSON(){
-        return null;
-    }
+    //Product deserializeJSON(){
+        //return null;
+    //}
 
     /**
      * Deserializes the information from XML to a Product object
      * @return a Product with the information stored in it
      */
-    Product deserializeXML(){
-        return null;
-    }
+    //Product deserializeXML(){
+       // return null;
+    //}
 }
