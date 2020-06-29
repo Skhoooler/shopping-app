@@ -1,7 +1,8 @@
 package com.doria.byui.shopface;
 
-//import com.ebay.services.finding.*;
+import com.ebay.services.finding.*;
 
+import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -64,6 +65,8 @@ public class EbayConnect implements ConnectStore{
             ebayConnection.disconnect();
 
             String responseString = ebayStringBuilder.toString();
+
+            Gson gson
             System.out.println(responseString);
         } catch (IOException e) {
             e.printStackTrace();
