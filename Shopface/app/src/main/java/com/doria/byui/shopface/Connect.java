@@ -14,7 +14,7 @@ class Connect {
     // String is the name of the product
     Map<String, Product> rawData;
     String query;
-    public Product[] ebayResults;
+    private Product[] ebayResults;
 
     Connect(String queryFromSearchBar){
         query = queryFromSearchBar;
@@ -45,7 +45,6 @@ class Connect {
      * //@param //ebaySearch
      */
     void search(Map<Integer, Product> ebaySearch){
-
         ebayResults = new Product[10];
         ;
         for  (Integer i = 0; i<10; i++)
