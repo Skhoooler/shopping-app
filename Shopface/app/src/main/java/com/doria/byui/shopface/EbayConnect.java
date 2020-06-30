@@ -66,7 +66,14 @@ public class EbayConnect implements ConnectStore{
 
             String responseString = ebayStringBuilder.toString();
 
-            Gson gson
+            Gson gson = new Gson();
+            FindItemsByKeywordsResponse deserializeResponse = new FindItemsByKeywordsResponse();
+            deserializeResponse = gson.fromJson(responseString, FindItemsByKeywordsResponse.class);
+
+
+            System.out.println("Pagination Output: "+ deserializeResponse.getPaginationOutput());
+            System.out.println(deserializeResponse.getSearchResult());
+
             System.out.println(responseString);
         } catch (IOException e) {
             e.printStackTrace();
