@@ -3,6 +3,7 @@ package com.doria.byui.shopface;
 import com.ebay.services.finding.*;
 
 import com.google.gson.Gson;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -58,22 +59,17 @@ public class EbayConnect implements ConnectStore{
             String rawEbayData = "";
             while((rawEbayData = inputBuffer.readLine()) != null){
                 ebayStringBuilder.append(rawEbayData);
-               // System.out.println("raw ebay data: " + rawEbayData);
             }
 
             inputBuffer.close();
             ebayConnection.disconnect();
 
             String responseString = ebayStringBuilder.toString();
-
             Gson gson = new Gson();
 
-            FindItemsByKeywordsResponse deserializeResponse = gson.fromJson(responseString, FindItemsByKeywordsResponse.class);
+            //Map map = gson.fromJson(responseString, Map.class);
 
-
-            System.out.println("Pagination Output: "+ deserializeResponse.getPaginationOutput());
-            System.out.println(deserializeResponse.getSearchResult());
-
+           // System.out.println(map.size());
             System.out.println(responseString);
         } catch (IOException e) {
             e.printStackTrace();
