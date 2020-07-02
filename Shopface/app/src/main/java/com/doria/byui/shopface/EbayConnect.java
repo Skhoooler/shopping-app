@@ -12,6 +12,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class EbayConnect implements ConnectStore{
@@ -67,9 +69,42 @@ public class EbayConnect implements ConnectStore{
             String responseString = ebayStringBuilder.toString();
             Gson gson = new Gson();
 
-            //Map map = gson.fromJson(responseString, Map.class);
+            Map<String, ArrayList> map = (Map<String, ArrayList>) gson.fromJson(responseString, Map.class);
 
-           // System.out.println(map.size());
+            /*
+            Made with help from Bro Barney. We looked at a JSON file we got back from ebay (Ebay JSON Sample.JSON)
+            and were able to deserialize it layer by layer, until we got to an ArrayList of items from Ebay
+            which we can use to
+             */
+                                                                                                         // In Ebay JSON sample.JSON file
+            ArrayList           responses        = map.get("findItemsByKeywordsResponse");               //
+            Map<String, Object> firstResponse    = (Map<String, Object>) responses.get(0);               //
+            ArrayList           theSearchResults = (ArrayList) firstResponse.get("searchResult");        //
+            Map<String, Object> firstResult      = (Map<String, Object>) theSearchResults.get(0);        //
+            ArrayList           retrievedItems   = (ArrayList) firstResult.get("item");                  // Line 16
+
+            Map<Integer, Product> ebayProducts = null;
+            for (int i = 0; i < 10; i++)
+            {
+                Product product = new Product();
+
+                Map<String, Object> item             = (Map<String, Object>) retrievedItems.get(i);      // Line 17
+                ArrayList           sellingStatus    = (ArrayList) item.get("sellingStatus");            // Line 80
+                Map<String, Object> sellingStatusMap = (Map<String, Object>) sellingStatus.get(0);       // Line 81
+                ArrayList           currentPrice     = (ArrayList) sellingStatusMap.get("currentPrice"); // Line 82
+                Map<String, Object> currentPriceMap  = (Map<String, Object>) currentPrice.get(0);        // Line 83
+
+                product.setName((String) item.get("title"));
+                product.setLink((String) item.get("viewItemURL"));
+                if (currentPriceMap.get("__value__") != null) {
+                    product.setPrice((float) Float.parseFloat((String) currentPriceMap.get("__value__")));
+                } else
+                {
+                    product.setPrice(0);
+                }
+
+                ebayProducts.put(i, product);
+            }
             System.out.println(responseString);
         } catch (IOException e) {
             e.printStackTrace();
