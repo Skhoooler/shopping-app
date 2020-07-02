@@ -12,9 +12,9 @@ import java.util.Set;
 
 class Connect {
     // String is the name of the product
-    Map<String, Product> rawData;
+    //Map<String, Product> rawData;
     String query;
-    private Product[] ebayResults;
+    Product[] ebayResults;
 
     Connect(String queryFromSearchBar){
         query = queryFromSearchBar;
