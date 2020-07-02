@@ -13,6 +13,7 @@ import java.net.URLEncoder;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class EbayConnect implements ConnectStore{
 
         System.out.println(ebayRequest);
 
-
+        Map<Integer, Product> products = null;
         // This is where the actual call is sent
         try {
             URL url = new URL(ebayRequest);
@@ -74,15 +75,17 @@ public class EbayConnect implements ConnectStore{
             /*
             Made with help from Bro Barney. We looked at a JSON file we got back from ebay (Ebay JSON Sample.JSON)
             and were able to deserialize it layer by layer, until we got to an ArrayList of items from Ebay
-            which we can use to
+            which we can use to grab the rest of the information to populate the map of Products
              */
                                                                                                          // In Ebay JSON sample.JSON file
-            ArrayList           responses        = map.get("findItemsByKeywordsResponse");               //
-            Map<String, Object> firstResponse    = (Map<String, Object>) responses.get(0);               //
-            ArrayList           theSearchResults = (ArrayList) firstResponse.get("searchResult");        //
-            Map<String, Object> firstResult      = (Map<String, Object>) theSearchResults.get(0);        //
+            ArrayList           responses        = map.get("findItemsByKeywordsResponse");               // Line 2
+            Map<String, Object> firstResponse    = (Map<String, Object>) responses.get(0);               // Line 3
+            ArrayList           theSearchResults = (ArrayList) firstResponse.get("searchResult");        // Line 13
+            Map<String, Object> firstResult      = (Map<String, Object>) theSearchResults.get(0);        // Line 14
             ArrayList           retrievedItems   = (ArrayList) firstResult.get("item");                  // Line 16
 
+            //Tried this also, but it crashed too
+            //Map<Integer, Product> ebayProducts = Collections.emptyMap();
             Map<Integer, Product> ebayProducts = null;
             for (int i = 0; i < 10; i++)
             {
@@ -94,24 +97,28 @@ public class EbayConnect implements ConnectStore{
                 ArrayList           currentPrice     = (ArrayList) sellingStatusMap.get("currentPrice"); // Line 82
                 Map<String, Object> currentPriceMap  = (Map<String, Object>) currentPrice.get(0);        // Line 83
 
-                product.setName((String) item.get("title"));
-                product.setLink((String) item.get("viewItemURL"));
+                product.setName((String) item.get("title").toString());
+                product.setLink((String) item.get("viewItemURL").toString());
                 if (currentPriceMap.get("__value__") != null) {
                     product.setPrice((float) Float.parseFloat((String) currentPriceMap.get("__value__")));
                 } else
                 {
                     product.setPrice(0);
                 }
+                product.setDesc(null);
 
                 ebayProducts.put(i, product);
+                // Crashes Here because the map is initialized to null. But it needs to be initialized to something
+                // Don't have time to fix it now, but the rest should work, if this gets fixed
             }
+
+            products = ebayProducts;
             System.out.println(responseString);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
-        return null;
+        return products;
     }
 
     /**
