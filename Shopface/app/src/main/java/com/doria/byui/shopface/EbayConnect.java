@@ -86,7 +86,9 @@ public class EbayConnect implements ConnectStore{
 
             //Tried this also, but it crashed too
             //Map<Integer, Product> ebayProducts = Collections.emptyMap();
-            Map<Integer, Product> ebayProducts = null;
+            //Map<Integer, Product> ebayProducts = null;
+            Map<Integer, Product> ebayProducts = new HashMap<>();
+
             for (int i = 0; i < 10; i++)
             {
                 Product product = new Product();
@@ -108,6 +110,8 @@ public class EbayConnect implements ConnectStore{
                 product.setDesc(null);
 
                 ebayProducts.put(i, product);
+                {
+                };
                 // Crashes Here because the map is initialized to null. But it needs to be initialized to something
                 // Don't have time to fix it now, but the rest should work, if this gets fixed
             }
