@@ -84,13 +84,16 @@ public class EbayConnect implements ConnectStore{
             Map<String, Object> firstResult      = (Map<String, Object>) theSearchResults.get(0);        // Line 14
             ArrayList           retrievedItems   = (ArrayList) firstResult.get("item");                  // Line 16
 
-            // This populates the map to be returned with the data from Ebay as Product objects
 
-            /*
-            Potential bug to be fixed: There's a chance the ebay search will return less than 10 items, and it could
-            fill the map with null pointers. The "i<10" part of the for loop needs to be changed to accommodate that
-             */
-            for (int i = 0; i < 10; i++)
+            // This fixes a potential bug in the for loop if the search returns less than 10 items.
+            // If it returns more than 10, then the for loop will only do it 10 times.
+            // If it returns less than 10, then it will do it that many times.
+            int j = (int) Integer.parseInt(firstResult.get("@count").toString());
+            if (j > 10){
+                j = 10;
+            }
+            // This populates the map to be returned with the data from Ebay as Product objects
+            for (int i = 0; i < j; i++)
             {
                 Product product = new Product();
 
