@@ -29,7 +29,7 @@ public class EbayConnect implements ConnectStore{
     }
 
 
-    public Map<Integer, Product> search(String incomingQuery, boolean sandbox) {
+    public HashMap<Integer, Product> search(String incomingQuery, boolean sandbox) {
         query = incomingQuery;
 
         String ebayRequest;
@@ -44,7 +44,7 @@ public class EbayConnect implements ConnectStore{
 
         System.out.println(ebayRequest);
 
-        Map<Integer, Product> products = null;
+        HashMap<Integer, Product> ebayProducts = new HashMap<Integer, Product>();
         // This is where the actual call is sent
         try {
             URL url = new URL(ebayRequest);
@@ -84,12 +84,16 @@ public class EbayConnect implements ConnectStore{
             Map<String, Object> firstResult      = (Map<String, Object>) theSearchResults.get(0);        // Line 14
             ArrayList           retrievedItems   = (ArrayList) firstResult.get("item");                  // Line 16
 
-            //Tried this also, but it crashed too
-            //Map<Integer, Product> ebayProducts = Collections.emptyMap();
-            //Map<Integer, Product> ebayProducts = null;
-            Map<Integer, Product> ebayProducts = new HashMap<>();
 
-            for (int i = 0; i < 10; i++)
+            // This fixes a potential bug in the for loop if the search returns less than 10 items.
+            // If it returns more than 10, then the for loop will only do it 10 times.
+            // If it returns less than 10, then it will do it that many times.
+            int j = (int) Integer.parseInt(firstResult.get("@count").toString());
+            if (j > 10){
+                j = 10;
+            }
+            // This populates the map to be returned with the data from Ebay as Product objects
+            for (int i = 0; i < j; i++)
             {
                 Product product = new Product();
 
@@ -110,19 +114,12 @@ public class EbayConnect implements ConnectStore{
                 product.setDesc(null);
 
                 ebayProducts.put(i, product);
-                {
-                };
-                // Crashes Here because the map is initialized to null. But it needs to be initialized to something
-                // Don't have time to fix it now, but the rest should work, if this gets fixed
             }
-
-            products = ebayProducts;
-            System.out.println(responseString);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return products;
+        return ebayProducts;
     }
 
     /**

@@ -1,14 +1,8 @@
 package com.doria.byui.shopface;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.ebay.services.finding.*;
-
-import java.sql.Array;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 class Connect {
     // String is the name of the product
@@ -20,7 +14,18 @@ class Connect {
         query = queryFromSearchBar;
 
         EbayConnect ebayConnect = new EbayConnect();
-        ebayConnect.search(query, true);
+        HashMap<Integer, Product> ebayResults = ebayConnect.search(query, true);
+
+
+        /* More Maps with products here*/
+
+        // Easiest way of sending the Maps of products to ShopFaceModel is through an ArrayList
+        ArrayList<HashMap<Integer, Product>> productMaps = new ArrayList<>();
+
+        productMaps.add(ebayResults);
+
+        new ShopFaceControl(query, productMaps);
+
     }
 
     Connect() {
@@ -33,8 +38,9 @@ class Connect {
      */
     Map<String, Product> getAllData(){
         EbayConnect ebayConnect = new EbayConnect();
-        Map<Integer,Product> ebaySearch = ebayConnect.search(query, true);
-        search(ebaySearch);
+        HashMap<Integer,Product> ebayResults = ebayConnect.search(query, true);
+
+        search(ebayResults);
 
         return null;
     }
@@ -46,7 +52,7 @@ class Connect {
      */
     void search(Map<Integer, Product> ebaySearch){
         ebayResults = new Product[10];
-        ;
+
         for  (Integer i = 0; i<10; i++)
         {
             ebayResults[i] = ebaySearch.get(i);
