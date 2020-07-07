@@ -13,20 +13,41 @@ import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
-public class AmazonConnect implements ConnectStore
+public class AmazonConnect
 {
     private  String api_key = "1CB231FADBBC448988C960384DCBF7D4";
-    private  String type = "search";
-    private  String amazon_domain = "amazon.com";
+    private  String type = "type=search";
+    private  String amazon_domain = "amazon_domain=amazon.com";
     private  String urlSample = "https://api.rainforestapi.com/request?";
     public String query = "";
-    @Override
-    public HashMap<Integer, Product> search(String incomingQuery, boolean Sandbox) {
+    public URLEncoder encoder;
+
+    public ArrayList search(String incomingQuery, boolean Sandbox) {
         query = incomingQuery;
+        String amazonRequest = constructURL(query);
+        ArrayList amazonProducts = new ArrayList();
         return null;
+    }
+
+    private String constructURL(String query){
+        String finishedURL = urlSample + '&' +  type + '&' + amazon_domain + getPayloadString();
+
+        return finishedURL;
+    }
+
+    private String getPayloadString() {
+        String keywords;
+
+        try {
+            keywords = URLEncoder.encode(query, StandardCharsets.UTF_8.toString());              // Encodes the query into URL format
+        }catch (UnsupportedEncodingException exception){
+            throw new RuntimeException(exception.getCause());
+        }
+
+        String URL = "&search_term=" + keywords;
+
+        return URL;
     }
 
 
