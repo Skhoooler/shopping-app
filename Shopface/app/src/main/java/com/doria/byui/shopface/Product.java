@@ -5,7 +5,7 @@ import android.media.Image;
 class Product {
     private String name;
     private float price;
-    private Image pic;
+    private String pic;
     private String desc;
     private String link;
     Product(){
@@ -42,5 +42,13 @@ class Product {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 }

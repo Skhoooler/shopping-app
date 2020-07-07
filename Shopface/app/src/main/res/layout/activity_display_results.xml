@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:srcCompat="@tools:sample/backgrounds/scenic"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/description" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -66,7 +66,8 @@
                 android:id="@+id/imageButton2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                tools:srcCompat="@tools:sample/backgrounds/scenic"
+                android:contentDescription="@string/description" />
 
             <TextView
                 android:id="@+id/textView3"
