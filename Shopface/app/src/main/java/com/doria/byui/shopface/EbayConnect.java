@@ -29,7 +29,7 @@ public class EbayConnect implements ConnectStore{
     }
 
 
-    public HashMap<Integer, Product> search(String incomingQuery, boolean sandbox) {
+    public ArrayList<Product> search(String incomingQuery, boolean sandbox) {
         query = incomingQuery;
 
         String ebayRequest;
@@ -44,7 +44,8 @@ public class EbayConnect implements ConnectStore{
 
         System.out.println(ebayRequest);
 
-        HashMap<Integer, Product> ebayProducts = new HashMap<Integer, Product>();
+        //HashMap<Integer, Product> ebayProducts = new HashMap<Integer, Product>();
+        ArrayList<Product> ebayProducts = new ArrayList<>();
         // This is where the actual call is sent
         try {
             URL url = new URL(ebayRequest);
@@ -113,7 +114,7 @@ public class EbayConnect implements ConnectStore{
                 }
                 product.setDesc(null);
 
-                ebayProducts.put(i, product);
+                ebayProducts.add(product);
             }
         } catch (IOException e) {
             e.printStackTrace();
