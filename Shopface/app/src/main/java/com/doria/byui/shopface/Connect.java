@@ -14,17 +14,16 @@ class Connect {
         query = queryFromSearchBar;
 
         EbayConnect ebayConnect = new EbayConnect();
-        HashMap<Integer, Product> ebayResults = ebayConnect.search(query, true);
+        ArrayList<Product> ebayResults = ebayConnect.search(query, true);
 
 
         /* More Maps with products here*/
 
         // Easiest way of sending the Maps of products to ShopFaceModel is through an ArrayList
-        ArrayList<HashMap<Integer, Product>> productMaps = new ArrayList<>();
 
-        productMaps.add(ebayResults);
+        
 
-        new ShopFaceControl(query, productMaps);
+        new ShopFaceControl(query, allProducts);
 
     }
 

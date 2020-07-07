@@ -1,8 +1,10 @@
 package com.doria.byui.shopface;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
-public class ShopFaceStatistics {
+class ShopFaceStatistics {
     private ArrayList<Float> data;
     private int count;
 
@@ -16,6 +18,22 @@ public class ShopFaceStatistics {
         count++;
     }
 
+    void removeData(float dataPoint){
+        data.remove(dataPoint);
+        count--;
+    }
+
+    float getPriceBuffer(){
+        float buffer = 0;
+        if (getAverage() - getStandardDeviation() <= 0){
+
+        }
+        else{
+            buffer = getAverage() - getStandardDeviation();
+        }
+        return buffer;
+    }
+
     float getStandardDeviation(){
         float standardDeviation = 0;
         float avg = getAverage();
@@ -26,10 +44,22 @@ public class ShopFaceStatistics {
             summation = (float) (summation + (Math.pow((data.get(i) - avg), 2)));
         }
 
-        standardDeviation = (float) Math.pow(summation/count, .5);
+        standardDeviation = (float) Math.pow(summation/(count - 1), .5);
         standardDeviation = (float) (Math.round(standardDeviation * 100)/100);
 
         return standardDeviation;
+    }
+
+    float getMedian(){
+
+        Collections.sort(this.data);
+        float median;
+        if (data.size() % 2 == 0)
+            median = (data.get(data.size() / 2) + (float) data.get(data.size() / 2 - 1))/2;
+        else
+            median = data.get(data.size() / 2);
+
+        return median;
     }
 
     float getAverage(){
@@ -42,6 +72,13 @@ public class ShopFaceStatistics {
         avg = (float) (Math.round(avg * 100.0)/100.0);
 
         return avg;
+    }
 
+    float getSmallestPrice(){
+        return Collections.min(data);
+    }
+
+    float getLargestPrice(){
+        return Collections.max(data);
     }
 }

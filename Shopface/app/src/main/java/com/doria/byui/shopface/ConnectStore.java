@@ -1,6 +1,7 @@
 package com.doria.byui.shopface;
 
-import java.util.Map;
+import java.util.ArrayList;
+
 
 public interface ConnectStore {
 
@@ -13,5 +14,5 @@ public interface ConnectStore {
      *                database
      * @return A map of Products
      */
-    Map<Integer, Product> search(String query, boolean Sandbox);
+    ArrayList<Product> search(String query, boolean Sandbox);
 }
