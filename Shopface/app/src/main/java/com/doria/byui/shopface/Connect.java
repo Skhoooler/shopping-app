@@ -1,6 +1,9 @@
 package com.doria.byui.shopface;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,15 +16,27 @@ class Connect {
     Connect(String queryFromSearchBar){
         query = queryFromSearchBar;
 
-        EbayConnect ebayConnect = new EbayConnect();
-        ArrayList<Product> ebayResults = ebayConnect.search(query, true);
+        // Returns an ArrayList with Products from Ebay
+        EbayConnect ebayConnect          = new EbayConnect();
+        ArrayList<Product> ebayResults   = ebayConnect.search(query, true);
+
+        // Returns an ArrayList with Products from Amazon
+        AmazonConnect amazonConnect      = new AmazonConnect();
+        ArrayList<Product> amazonResults = amazonConnect.search(query, false);
 
 
-        /* More Maps with products here*/
+        // Combines all of the products from the ArrayLists into one ArrayList
+        ArrayList<Product> allProducts = new ArrayList<>();
+        allProducts.addAll(ebayResults);
+        allProducts.addAll(amazonResults);
 
-        // Easiest way of sending the Maps of products to ShopFaceModel is through an ArrayList
-
-        
+        // Sorts via Price in descending order (cheapest first)
+        Collections.sort(allProducts, new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+                return Math.round(o1.getPrice() - o2.getPrice());
+            }
+        });
 
         new ShopFaceControl(query, allProducts);
 
@@ -37,9 +52,9 @@ class Connect {
      */
     Map<String, Product> getAllData(){
         EbayConnect ebayConnect = new EbayConnect();
-        HashMap<Integer,Product> ebayResults = ebayConnect.search(query, true);
+        ArrayList<Product> ebayResults = ebayConnect.search(query, true);
 
-        search(ebayResults);
+        //search(ebayResults);
 
         return null;
     }
