@@ -14,7 +14,7 @@ class Connect {
     String query;
     Product[] ebayResults;
 
-    Connect(String queryFromSearchBar) throws IOException {
+    Connect(String queryFromSearchBar) {
         query = queryFromSearchBar;
 
         // Returns an ArrayList with Products from Ebay
@@ -22,14 +22,21 @@ class Connect {
         ArrayList<Product> ebayResults   = ebayConnect.search(query, true);
 
         // Returns an ArrayList with Products from Amazon
-        AmazonConnect amazonConnect      = new AmazonConnect();
-        ArrayList<Product> amazonResults = amazonConnect.search(query);
+
+
+
+            AmazonConnect amazonConnect = new AmazonConnect();
+
+                ArrayList<Product> amazonResults = amazonConnect.search(query);
+
+
+
 
 
         // Combines all of the products from the ArrayLists into one ArrayList
         ArrayList<Product> allProducts = new ArrayList<>();
         allProducts.addAll(ebayResults);
-//        allProducts.addAll(amazonResults);
+        allProducts.addAll(amazonResults);
 
         // Sorts via Price in descending order (cheapest first)
         Collections.sort(allProducts, new Comparator<Product>() {

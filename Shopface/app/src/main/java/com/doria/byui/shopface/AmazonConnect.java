@@ -1,6 +1,7 @@
 package com.doria.byui.shopface;
 
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.util.List;
 import java.util.Map;
 import com.google.gson.Gson;
@@ -25,27 +26,55 @@ public class AmazonConnect
     public String query = "";
     public URLEncoder encoder;
 
-    public ArrayList search(String incomingQuery) throws IOException {
+    public ArrayList search(String incomingQuery)  {
         query = incomingQuery;
         String amazonRequest = constructURL(query);
         ArrayList<Product> amazonProducts = new ArrayList<>();
-        URL url = new URL (amazonRequest);
-        HttpURLConnection amazonConnection = (HttpURLConnection) url.openConnection();
-        amazonConnection.setRequestMethod("GET");
+        URL url = null;
+        try {
+            url = new URL(amazonRequest);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        HttpURLConnection amazonConnection = null;
+        try {
+            amazonConnection = (HttpURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            amazonConnection.setRequestMethod("GET");
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        }
         amazonConnection.setConnectTimeout(5000);
         amazonConnection.setReadTimeout(5000);
 
         Gson gson = new Gson();
         String rawAmazonData = "";
 
-        BufferedReader inputBuffer = new BufferedReader(
-                new InputStreamReader(amazonConnection.getInputStream()));
+        BufferedReader inputBuffer = null;
+        try {
+            inputBuffer = new BufferedReader(
+                    new InputStreamReader(amazonConnection.getInputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         StringBuilder amazonStringBuilder = new StringBuilder();
 
-        while((rawAmazonData = inputBuffer.readLine()) != null){
+        while(true){
+            try {
+                if (!((rawAmazonData = inputBuffer.readLine()) != null)) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             amazonStringBuilder.append(rawAmazonData);
         }
-        inputBuffer.close();
+        try {
+            inputBuffer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         amazonConnection.disconnect();
         String responseString = amazonStringBuilder.toString();
 
