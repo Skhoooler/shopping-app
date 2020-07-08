@@ -50,18 +50,6 @@ class ShopFaceStatistics {
         return standardDeviation;
     }
 
-    float getMedian(){
-
-      /*  Collections.sort(this.data);
-        float median;
-        if (data.size() % 2 == 0)
-            median = (data.get(data.size() / 2) + (float) data.get(data.size() / 2 - 1))/2;
-        else
-            median = data.get(data.size() / 2);
-
-        return median;*/
-      return 0;
-    }
 
     float getAverage(){
         float avg = 0;
@@ -73,6 +61,26 @@ class ShopFaceStatistics {
         avg = (float) (Math.round(avg * 100.0)/100.0);
 
         return avg;
+    }
+
+
+    float getMedian(){
+        int medianIndex = (int) data.size() / 2;
+        return data.get(medianIndex);
+    }
+
+    private int getMedianIndex(){
+        return (int) data.size() / 2;
+    }
+
+    float getIQR()
+    {
+        int quarterIndex = (int) data.size() / 4;
+
+        int Q1index = getMedianIndex() - quarterIndex;
+        int Q3index = getMedianIndex() + quarterIndex;
+
+      return data.get(Q3index - Q1index);
     }
 
     float getSmallestPrice(){
