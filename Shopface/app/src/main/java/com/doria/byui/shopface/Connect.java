@@ -1,5 +1,6 @@
 package com.doria.byui.shopface;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +14,7 @@ class Connect {
     String query;
     Product[] ebayResults;
 
-    Connect(String queryFromSearchBar){
+    Connect(String queryFromSearchBar) throws IOException {
         query = queryFromSearchBar;
 
         // Returns an ArrayList with Products from Ebay
@@ -22,7 +23,7 @@ class Connect {
 
         // Returns an ArrayList with Products from Amazon
         AmazonConnect amazonConnect      = new AmazonConnect();
-        ArrayList<Product> amazonResults = amazonConnect.search(query, false);
+        ArrayList<Product> amazonResults = amazonConnect.search(query);
 
 
         // Combines all of the products from the ArrayLists into one ArrayList

@@ -28,7 +28,7 @@ public class AmazonConnect
     public ArrayList search(String incomingQuery) throws IOException {
         query = incomingQuery;
         String amazonRequest = constructURL(query);
-        ArrayList amazonProducts = new ArrayList();
+        ArrayList<Product> amazonProducts = new ArrayList<>();
         URL url = new URL (amazonRequest);
         HttpURLConnection amazonConnection = (HttpURLConnection) url.openConnection();
         amazonConnection.setRequestMethod("GET");
@@ -49,8 +49,23 @@ public class AmazonConnect
         amazonConnection.disconnect();
         String responseString = amazonStringBuilder.toString();
 
-        amazonProducts = gson.fromJson(responseString, ArrayList.class);
+        Map<String, Object> nonProductArray;
 
+        nonProductArray = gson.fromJson(responseString, Map.class);
+        ArrayList searchResults =(ArrayList) nonProductArray.get("search_results");
+
+        for (int i = 0; i < searchResults.size(); i++){
+            Product product = new Product();
+
+            Map<String, Object> items = (Map<String, Object>) searchResults.get(i);
+            product.setName(items.get("title").toString());
+            product.setLink(items.get("link").toString());
+            product.setPic(items.get("image").toString());
+            ArrayList prices = (ArrayList) items.get("prices");
+            Map<String,Object> priceValues = (Map<String,Object>) prices.get(0);
+            product.setPrice(Float.valueOf(priceValues.get("value").toString()));
+            amazonProducts.add(product);
+        }
         return amazonProducts;
     }
 
