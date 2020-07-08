@@ -10,7 +10,7 @@ class ShopFaceControl {
     private HashMap<Integer, Product> sortedProducts = new HashMap<>();
 
 
-    ShopFaceControl(String incomingQuery, HashMap<Integer, Product> allProducts){
+    ShopFaceControl(String incomingQuery, ArrayList<Product> allProducts){
         query = incomingQuery;
 
         sort(allProducts);
@@ -20,20 +20,17 @@ class ShopFaceControl {
      * Sorts the raw data that comes from the ShopFaceModel Class into a second
      * map that contains the best results from the search.
      */
-    private void sort(HashMap<Integer, Product> allProducts){
+    private void sort(ArrayList<Product> allProducts){
         /*
         Figured the best way to sort through the maps of products is to start at one Standard
         Deviation before the Average of all the prices, so I made a ShopfaceStatistics class to
-        facilitate that. Didn't get around to testing it yet though
+        facilitate that.
          */
 
         // The next loop populates the data for ShopfaceStatistics
         ShopFaceStatistics stats = new ShopFaceStatistics();
-        for (int i = 0; i < productMaps.size(); i++){
-            for (int j = 0; j < productMaps.get(i).size(); j++){
-                stats.addData(productMaps.get(i).get(j).getPrice());
-                System.out.println("Price: " + productMaps.get(i).get(j).getPrice());
-            }
+        for(int i = 0; i < allProducts.size(); i++){
+            stats.addData(allProducts.get(i).getPrice());
         }
 
         // These next for loops select the best 10 items from all of the stores, based on the
