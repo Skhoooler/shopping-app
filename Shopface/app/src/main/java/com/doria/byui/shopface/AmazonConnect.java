@@ -1,5 +1,6 @@
 package com.doria.byui.shopface;
 
+import java.net.MalformedURLException;
 import java.util.Map;
 import com.google.gson.Gson;
 
@@ -23,15 +24,20 @@ public class AmazonConnect
     public String query = "";
     public URLEncoder encoder;
 
-    public ArrayList search(String incomingQuery, boolean Sandbox) {
+    public ArrayList search(String incomingQuery, boolean Sandbox) throws IOException {
         query = incomingQuery;
         String amazonRequest = constructURL(query);
         ArrayList amazonProducts = new ArrayList();
-        return null;
+        URL url = new URL (amazonRequest);
+        HttpURLConnection amazonConnection = (HttpURLConnection) url.openConnection();
+        amazonConnection.setRequestMethod("GET");
+        amazonConnection.setConnectTimeout(5000);
+        amazonConnection.setReadTimeout(5000);
+        return amazonProducts;
     }
 
     private String constructURL(String query){
-        String finishedURL = urlSample + '&' +  type + '&' + amazon_domain + getPayloadString();
+       String finishedURL = urlSample + '&' +  type + '&' + amazon_domain + getPayloadString();
 
         return finishedURL;
     }
