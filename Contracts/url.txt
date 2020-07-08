@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/3375166/android-drawable-images-from-url
