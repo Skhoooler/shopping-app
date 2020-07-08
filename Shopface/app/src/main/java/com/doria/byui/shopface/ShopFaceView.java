@@ -11,8 +11,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
+// Sorry, I needed to test some stuff
 public class ShopFaceView {
-    private ShopFaceControl sort;
+ /*   private ShopFaceControl sort;
 
     public Map<String, Product> getSortedData() {
         return sortedData;
@@ -63,5 +64,5 @@ public class ShopFaceView {
     }
     void nextPage(int index){
         //calls sort.getData
-    }
+    }*/
 }

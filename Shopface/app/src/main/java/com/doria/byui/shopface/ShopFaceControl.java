@@ -31,6 +31,7 @@ class ShopFaceControl {
         ShopFaceStatistics stats = new ShopFaceStatistics();
         for(int i = 0; i < allProducts.size(); i++){
             stats.addData(allProducts.get(i).getPrice());
+            System.out.println(allProducts.get(i).getName() + " for " + allProducts.get(i).getPrice());
         }
 
         // These next for loops select the best 10 items from all of the stores, based on the
