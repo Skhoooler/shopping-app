@@ -28,7 +28,7 @@ class Connect {
         // Combines all of the products from the ArrayLists into one ArrayList
         ArrayList<Product> allProducts = new ArrayList<>();
         allProducts.addAll(ebayResults);
-        allProducts.addAll(amazonResults);
+//        allProducts.addAll(amazonResults);
 
         // Sorts via Price in descending order (cheapest first)
         Collections.sort(allProducts, new Comparator<Product>() {
@@ -37,7 +37,6 @@ class Connect {
                 return Math.round(o1.getPrice() - o2.getPrice());
             }
         });
-
         new ShopFaceControl(query, allProducts);
 
     }

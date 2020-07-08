@@ -52,14 +52,15 @@ class ShopFaceStatistics {
 
     float getMedian(){
 
-        Collections.sort(this.data);
+      /*  Collections.sort(this.data);
         float median;
         if (data.size() % 2 == 0)
             median = (data.get(data.size() / 2) + (float) data.get(data.size() / 2 - 1))/2;
         else
             median = data.get(data.size() / 2);
 
-        return median;
+        return median;*/
+      return 0;
     }
 
     float getAverage(){

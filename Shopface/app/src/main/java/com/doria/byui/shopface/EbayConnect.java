@@ -90,8 +90,8 @@ public class EbayConnect implements ConnectStore{
             // If it returns more than 10, then the for loop will only do it 10 times.
             // If it returns less than 10, then it will do it that many times.
             int j = (int) Integer.parseInt(firstResult.get("@count").toString());
-            if (j > 10){
-                j = 10;
+            if (j > 25){
+                j = 25;
             }
             // This populates the map to be returned with the data from Ebay as Product objects
             for (int i = 0; i < j; i++)
