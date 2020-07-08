@@ -1,8 +1,8 @@
 package com.doria.byui.shopface;
 
-import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ class Connect {
     String query;
     Product[] ebayResults;
 
-    Connect(String queryFromSearchBar) throws IOException {
+    Connect(String queryFromSearchBar){
         query = queryFromSearchBar;
 
         // Returns an ArrayList with Products from Ebay
@@ -23,7 +23,7 @@ class Connect {
 
         // Returns an ArrayList with Products from Amazon
         AmazonConnect amazonConnect      = new AmazonConnect();
-        ArrayList<Product> amazonResults = amazonConnect.search(query);
+       // ArrayList<Product> amazonResults = amazonConnect.search(query, false);
 
 
         // Combines all of the products from the ArrayLists into one ArrayList
@@ -38,6 +38,7 @@ class Connect {
                 return Math.round(o1.getPrice() - o2.getPrice());
             }
         });
+
         new ShopFaceControl(query, allProducts);
 
     }

@@ -1,7 +1,5 @@
 package com.doria.byui.shopface;
 
-import com.ebay.services.finding.*;
-
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -13,8 +11,6 @@ import java.net.URLEncoder;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 public class EbayConnect implements ConnectStore{

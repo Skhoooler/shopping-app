@@ -47,6 +47,7 @@ class ShopFaceControl {
         System.out.println("Median: " + stats.getMedian());
         System.out.println("Average: " + stats.getAverage());
         System.out.println("St Dev: " + stats.getStandardDeviation());
+        System.out.println("IQR: " + stats.getIQR());
     }
 
     /**
