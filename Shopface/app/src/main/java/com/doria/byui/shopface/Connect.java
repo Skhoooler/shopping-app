@@ -29,6 +29,13 @@ class Connect {
         allProducts.addAll(ebayResults);
         allProducts.addAll(amazonResults);
 
+        if (amazonResults == null){
+            System.out.println("Amazon Results is NULLLLLL >:(");
+
+        }
+        else{
+            System.out.println("Amazon results is not null :)");
+        }
         // Sorts via Price in descending order (cheapest first)
         Collections.sort(allProducts, new Comparator<Product>() {
             @Override
