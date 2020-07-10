@@ -52,14 +52,12 @@ public class AmazonConnect
 
         Gson gson = new Gson();
         String rawAmazonData = "";
-
-        BufferedReader inputBuffer = null;
         try {
+        BufferedReader inputBuffer;
+
             inputBuffer = new BufferedReader(
                     new InputStreamReader(amazonConnection.getInputStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         StringBuilder amazonStringBuilder = new StringBuilder();
 
         while(true){
@@ -70,30 +68,38 @@ public class AmazonConnect
             }
             amazonStringBuilder.append(rawAmazonData);
         }
+            ;
         try {
             inputBuffer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        amazonConnection.disconnect();
+            amazonConnection.disconnect();
         String responseString = amazonStringBuilder.toString();
 
-        Map<String, Object> nonProductArray;
-
+        Map<String, Map> nonProductArray;
+        System.out.println(responseString);
         nonProductArray = gson.fromJson(responseString, Map.class);
         ArrayList searchResults =(ArrayList) nonProductArray.get("search_results");
 
         for (int i = 0; i < searchResults.size(); i++){
             Product product = new Product();
 
-            Map<String, Object> items = (Map<String, Object>) searchResults.get(i);
+            Map<String, Map> items = (Map<String, Map>) searchResults.get(i);
             product.setName(items.get("title").toString());
             product.setLink(items.get("link").toString());
             product.setPic(items.get("image").toString());
-            ArrayList prices = (ArrayList) items.get("prices");
+            ArrayList<Map> prices = (ArrayList<Map>) items.get("prices");
+
             Map<String,Object> priceValues = (Map<String,Object>) prices.get(0);
             product.setPrice(Float.valueOf(priceValues.get("value").toString()));
             amazonProducts.add(product);
+        }
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return amazonProducts;
     }
