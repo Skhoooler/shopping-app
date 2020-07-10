@@ -85,7 +85,7 @@ public class AmazonConnect
         for (int i = 0; i < searchResults.size(); i++){
             Product product = new Product();
             System.out.println("Crashing on index: " + i);
-            Map<String, Map> items1 = (Map<String, Map>) searchResults.get(i);
+            Map<String, Map<String, Object>> items1 = (Map<String, Map<String, Object>>) searchResults.get(i);
             Map<String, Object> items2 = (Map<String, Object>) searchResults.get(i);
             product.setName(items2.get("title").toString());
             product.setLink(items2.get("link").toString());
