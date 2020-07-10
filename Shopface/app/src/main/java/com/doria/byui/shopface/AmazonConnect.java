@@ -19,7 +19,7 @@ import java.util.Collections;
 
 public class AmazonConnect
 {
-    private  String api_key = "1CB231FADBBC448988C960384DCBF7D4";
+    private  String api_key = "api_key=1CB231FADBBC448988C960384DCBF7D4";
     private  String type = "type=search";
     private  String amazon_domain = "amazon_domain=amazon.com";
     private  String urlSample = "https://api.rainforestapi.com/request?";
@@ -99,7 +99,7 @@ public class AmazonConnect
     }
 
     private String constructURL(String query){
-       String finishedURL = urlSample + '&' +  type + '&' + amazon_domain + getPayloadString();
+       String finishedURL = urlSample + api_key + '&' +  type + '&' + amazon_domain + getPayloadString();
 
         return finishedURL;
     }
