@@ -81,15 +81,17 @@ public class AmazonConnect
         System.out.println(responseString);
         nonProductArray = gson.fromJson(responseString, Map.class);
         ArrayList searchResults =(ArrayList) nonProductArray.get("search_results");
-
+           ;
         for (int i = 0; i < searchResults.size(); i++){
             Product product = new Product();
 
-            Map<String, Map> items = (Map<String, Map>) searchResults.get(i);
-            product.setName(items.get("title").toString());
-            product.setLink(items.get("link").toString());
-            product.setPic(items.get("image").toString());
-            ArrayList<Map> prices = (ArrayList<Map>) items.get("prices");
+            Map<String, Map> items1 = (Map<String, Map>) searchResults.get(i);
+            Map<String, Object> items2 = (Map<String, Object>) searchResults.get(i);
+            product.setName(items2.get("title").toString());
+            product.setLink(items2.get("link").toString());
+            product.setPic(items2.get("image").toString());
+
+            ArrayList<Map> prices = (ArrayList<Map>) items1.get("prices");
 
             Map<String,Object> priceValues = (Map<String,Object>) prices.get(0);
             product.setPrice(Float.valueOf(priceValues.get("value").toString()));
