@@ -35,6 +35,7 @@ class ShopFaceControl {
             System.out.println(allProducts.get(i).getName() + " for $" + allProducts.get(i).getPrice());
         }
 
+        System.out.println("Number of Items: " + allProducts.size());
         System.out.println("Median: " + stats.getPercentile(50));
         System.out.println("Average: " + stats.getMean());
         System.out.println("St Dev: " + stats.getStandardDeviation());
