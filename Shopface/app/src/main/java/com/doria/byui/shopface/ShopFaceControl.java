@@ -15,6 +15,8 @@ class ShopFaceControl {
         query = incomingQuery;
 
         sort(allProducts);
+
+        new ShopFaceView(sortedProducts, query);
     }
 
     /**
