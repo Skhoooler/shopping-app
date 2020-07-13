@@ -24,10 +24,10 @@ class Connect {
         }
         //Returns an ArrayList with Products from Amazon
         else {
-            AmazonConnect amazonConnect = new AmazonConnect();
-            ArrayList<Product> amazonResults = amazonConnect.search(query);
-            allProducts.addAll(amazonResults);
-            System.out.println("Amazon Items: " + amazonResults.size());
+         //   AmazonConnect amazonConnect = new AmazonConnect();
+         //   ArrayList<Product> amazonResults = amazonConnect.search(query);
+         //   allProducts.addAll(amazonResults);
+         //   System.out.println("Amazon Items: " + amazonResults.size());
         }
 
         // Combines all of the products from the ArrayLists into one ArrayList
