@@ -38,8 +38,6 @@ public class EbayConnect implements ConnectStore{
             ebayRequest = constructAPICall(opName);
         }
 
-        System.out.println(ebayRequest);
-
         //HashMap<Integer, Product> ebayProducts = new HashMap<Integer, Product>();
         ArrayList<Product> ebayProducts = new ArrayList<>();
         // This is where the actual call is sent

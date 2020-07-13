@@ -3,6 +3,7 @@ package com.doria.byui.shopface;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,26 +35,28 @@ public class MainActivity extends AppCompatActivity {
     public void SearchOnClick(View view){
         EditText searchBox = (EditText)findViewById(R.id.editText);
         final String query = searchBox.getText().toString();
-        //SharedPreferences.Editor editor = sharedPreferences.edit();
-        //editor.putString(queryKey, query);
-        //editor.commit();
-        //System.out.println(sharedPreferences.getString(queryKey, ""));
+
         Thread amazonConnectThread = new Thread(new Runnable() {
             @Override
             public void run(){
                 Search search = new Search(query, false);
             }
         });
-        amazonConnectThread.start();
+
         Thread ebayConnectThread = new Thread(new Runnable() {
             @Override
             public void run(){
                 Search search = new Search(query, true);
             }
         });
-       ebayConnectThread.start();
+        amazonConnectThread.start();
+        ebayConnectThread.start();
+
+        Intent intent = new Intent(this, DisplayResultsActivity.class);
+        startActivity(intent);
     }
-    public  void DeleteOnStop(){
+
+    public void DeleteOnStop(){
 
     }
 }

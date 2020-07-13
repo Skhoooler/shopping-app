@@ -2,13 +2,12 @@ package com.doria.byui.shopface;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
 
 class ShopFaceControl {
 
     public String query;
-    private HashMap<Integer, Product> sortedProducts = new HashMap<>();
+    private ArrayList<Product> sortedProducts = new ArrayList<>();
     private DescriptiveStatistics stats = new DescriptiveStatistics();
 
 
@@ -16,6 +15,8 @@ class ShopFaceControl {
         query = incomingQuery;
 
         sort(allProducts);
+
+       // new ShopFaceView(sortedProducts, query);
     }
 
     /**
@@ -32,15 +33,17 @@ class ShopFaceControl {
         // The next loop populates the data for the statistics class
         for (int i = 0; i < allProducts.size(); i++) {
             stats.addValue(allProducts.get(i).getPrice());
-            System.out.println(allProducts.get(i).getName() + " for $" + allProducts.get(i).getPrice());
+        }
+
+        float range = (float) (stats.getMean() - stats.getStandardDeviation());
+        for (int i = 0; i < allProducts.size(); i++){
+            if (allProducts.get(i).getPrice() > range) {
+                sortedProducts.add(allProducts.get(i));
+                System.out.println(allProducts.get(i).getName() + " for $" + allProducts.get(i).getPrice());
+            }
         }
 
         System.out.println("Number of Items: " + allProducts.size());
-        System.out.println("Median: " + stats.getPercentile(50));
-        System.out.println("Average: " + stats.getMean());
-        System.out.println("St Dev: " + stats.getStandardDeviation());
+        System.out.println("Number of sorted Items: " + sortedProducts.size());
     }
-
-
-
 }
