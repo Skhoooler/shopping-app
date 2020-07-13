@@ -26,7 +26,8 @@ public class AmazonConnect
     public String query = "";
     public URLEncoder encoder;
 
-    public ArrayList search(String incomingQuery)  {
+
+    public ArrayList<Product> search(String incomingQuery)  {
         query = incomingQuery;
         String amazonRequest = constructURL(query);
         ArrayList<Product> amazonProducts = new ArrayList<>();

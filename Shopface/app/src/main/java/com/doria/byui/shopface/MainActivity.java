@@ -12,6 +12,8 @@ import android.text.Layout;
 import android.view.View;
 import android.widget.EditText;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.jar.Attributes;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,19 +38,22 @@ public class MainActivity extends AppCompatActivity {
         EditText searchBox = (EditText)findViewById(R.id.editText);
         final String query = searchBox.getText().toString();
 
+        final ArrayList[] amazonProducts = new ArrayList[]{new ArrayList<>()};
         Thread amazonConnectThread = new Thread(new Runnable() {
             @Override
             public void run(){
-                Search search = new Search(query, false);
+                amazonProducts[0] = new AmazonConnect().search(query);
             }
         });
 
+        final ArrayList[] ebayProducts = new ArrayList[]{new ArrayList<>()};
         Thread ebayConnectThread = new Thread(new Runnable() {
             @Override
             public void run(){
-                Search search = new Search(query, true);
+                ebayProducts[0] = new EbayConnect().search(query);
             }
         });
+
         amazonConnectThread.start();
         ebayConnectThread.start();
 

@@ -13,8 +13,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-
-// Sorry, I needed to test some stuff
 public class ShopFaceView {
     private ShopFaceControl sort;
 

@@ -25,18 +25,14 @@ public class EbayConnect implements ConnectStore{
     }
 
 
-    public ArrayList<Product> search(String incomingQuery, boolean sandbox) {
+    public ArrayList<Product> search(String incomingQuery) {
         query = incomingQuery;
 
         String ebayRequest;
         String opName = "findItemsByKeywords";
 
         // Puts together the API request
-        if (sandbox) {
-            ebayRequest = constructSandboxAPICall(opName);
-        } else {
-            ebayRequest = constructAPICall(opName);
-        }
+        ebayRequest = constructSandboxAPICall(opName);
 
         //HashMap<Integer, Product> ebayProducts = new HashMap<Integer, Product>();
         ArrayList<Product> ebayProducts = new ArrayList<>();

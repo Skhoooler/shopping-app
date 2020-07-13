@@ -1,7 +1,6 @@
 package com.doria.byui.shopface;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
 
 class ShopFaceControl {
@@ -16,7 +15,7 @@ class ShopFaceControl {
 
         sort(allProducts);
 
-       // new ShopFaceView(sortedProducts, query);
+        new ShopFaceView(sortedProducts, query);
     }
 
     /**
