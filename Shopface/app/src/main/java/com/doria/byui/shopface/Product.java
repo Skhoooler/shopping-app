@@ -1,5 +1,6 @@
 package com.doria.byui.shopface;
 
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 
 class Product {
@@ -8,6 +9,7 @@ class Product {
     private String pic;
     private String desc;
     private String link;
+    private Drawable image;
     Product(){
 
     }
@@ -50,5 +52,13 @@ class Product {
 
     public void setPic(String pic) {
         this.pic = pic;
+    }
+
+    public Drawable getImage() {
+        return image;
+    }
+
+    public void setImage(Drawable image) {
+        this.image = image;
     }
 }

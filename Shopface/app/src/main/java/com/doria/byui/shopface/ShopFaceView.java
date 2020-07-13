@@ -1,7 +1,9 @@
 package com.doria.byui.shopface;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
@@ -9,34 +11,30 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
+import java.util.ArrayList;
+
 
 // Sorry, I needed to test some stuff
 public class ShopFaceView {
- /*   private ShopFaceControl sort;
+    private ShopFaceControl sort;
 
-    public Map<String, Product> getSortedData() {
-        return sortedData;
+
+
+    private ArrayList<Product> sortedData;
+
+
+    public ShopFaceView(ArrayList<Product> sortedProducts, String query){
+        sortedData = sortedProducts;
+        imageDecode();
     }
 
-    public void setSortedData(Map<String, Product> sortedData) {
-        this.sortedData = sortedData;
-    }
-
-    private Map<String, Product> sortedData;
-
-    public ShopFaceView(String query){
-
-    }
-    void display(){
-
-    }
-    Bitmap imageDecode(){
+    public void imageDecode(){
+        String url = "";
         for (Integer i = 0; i < sortedData.size(); i++){
-            if (sortedData.(i).image)
-            String url = sortedData.(i).image;
-            Bitmap drawable_from_url(String url) throws java.net.MalformedURLException, java.io.IOException
-            {
+            if (!sortedData.get(i).getPic().isEmpty())
+             url = sortedData.get(i).getPic();
+            Bitmap drawable_from_url;
+
 
                 HttpURLConnection connection = null;
                 try {
@@ -57,12 +55,10 @@ public class ShopFaceView {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                drawable_from_url = BitmapFactory.decodeStream(input);
 
-                return BitmapFactory.decodeStream(input);
-            }
+                sortedData.get(i).setImage(new BitmapDrawable(Resources.getSystem(),drawable_from_url));
+
         }
     }
-    void nextPage(int index){
-        //calls sort.getData
-    }*/
 }
