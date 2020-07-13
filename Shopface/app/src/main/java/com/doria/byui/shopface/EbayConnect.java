@@ -68,7 +68,7 @@ public class EbayConnect implements ConnectStore{
             and were able to deserialize it layer by layer, until we got to an ArrayList of items from Ebay
             which we can use to grab the rest of the information to populate the map of Products
              */
-                                                                                                         // In Ebay JSON sample.JSON file
+            // In Ebay JSON sample.JSON file
             ArrayList           responses        = map.get("findItemsByKeywordsResponse");               // Line 2
             Map<String, Object> firstResponse    = (Map<String, Object>) responses.get(0);               // Line 3
             ArrayList           theSearchResults = (ArrayList) firstResponse.get("searchResult");        // Line 13

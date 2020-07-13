@@ -4,22 +4,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
-
 class Connect {
     // String is the name of the product
     //Map<String, Product> rawData;
     String query;
     Product[] ebayResults;
-
     Connect(String queryFromSearchBar, boolean isEbay)  {
         query = queryFromSearchBar;
-
         ArrayList<Product> allProducts = new ArrayList<>();
         // Returns an ArrayList with Products from Ebay
         if (isEbay) {
             EbayConnect ebayConnect = new EbayConnect();
             ArrayList<Product> ebayResults = ebayConnect.search(query, true);
-
             allProducts.addAll(ebayResults);
         }
         //Returns an ArrayList with Products from Amazon
@@ -29,12 +25,7 @@ class Connect {
          //   allProducts.addAll(amazonResults);
          //   System.out.println("Amazon Items: " + amazonResults.size());
         }
-
         // Combines all of the products from the ArrayLists into one ArrayList
-
-
-
-
         // Sorts via Price in descending order (cheapest first)
         Collections.sort(allProducts, new Comparator<Product>() {
             @Override
@@ -43,13 +34,9 @@ class Connect {
             }
         });
        // new ShopFaceControl(query, allProducts);
-
     }
-
     Connect() {
-
     }
-
     /**
      * Returns a map full of Product objects
      * @return a map with the raw data from the connect interface
@@ -57,12 +44,9 @@ class Connect {
     Map<String, Product> getAllData(){
         EbayConnect ebayConnect = new EbayConnect();
         ArrayList<Product> ebayResults = ebayConnect.search(query, true);
-
         //search(ebayResults);
-
         return null;
     }
-
     /**
      * Queries the different APIs to get the top 10 results from each website and puts
      * it in a map
@@ -70,13 +54,11 @@ class Connect {
      *
     void search(Map<Integer, Product> ebaySearch){
         ebayResults = new Product[10];
-
         for  (Integer i = 0; i<10; i++)
         {
             ebayResults[i] = ebaySearch.get(i);
         }
     }
-
     /**
      * Constructs URLS for all of the different website's who's data base is being queried
      * @return a complete URL in string form
@@ -84,7 +66,6 @@ class Connect {
     String constructURLS(){
         return null;
     }
-
     /**
      * Actually sends the query and receives the information from the database
      * @return a string with the raw XML or JSON information from the database
@@ -92,7 +73,6 @@ class Connect {
     String sendQuery(){
         return null;
     }
-
     /**
      * Deserializes the information from JSON to a Product object
      * @return a Product object with the information stored in it
@@ -100,7 +80,6 @@ class Connect {
     //Product deserializeJSON(){
         //return null;
     //}
-
     /**
      * Deserializes the information from XML to a Product object
      * @return a Product with the information stored in it

@@ -30,32 +30,32 @@ public class ShopFaceView {
         String url = "";
         for (Integer i = 0; i < sortedData.size(); i++){
             if (!sortedData.get(i).getPic().isEmpty())
-             url = sortedData.get(i).getPic();
+                url = sortedData.get(i).getPic();
             Bitmap drawable_from_url;
 
 
-                HttpURLConnection connection = null;
-                try {
-                    connection = (HttpURLConnection) new URL(url).openConnection();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                connection.setRequestProperty("User-agent", "Mozilla/4.0");
+            HttpURLConnection connection = null;
+            try {
+                connection = (HttpURLConnection) new URL(url).openConnection();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            connection.setRequestProperty("User-agent", "Mozilla/4.0");
 
-                try {
-                    connection.connect();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                InputStream input = null;
-                try {
-                    input = connection.getInputStream();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                drawable_from_url = BitmapFactory.decodeStream(input);
+            try {
+                connection.connect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream input = null;
+            try {
+                input = connection.getInputStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            drawable_from_url = BitmapFactory.decodeStream(input);
 
-                sortedData.get(i).setImage(new BitmapDrawable(Resources.getSystem(),drawable_from_url));
+            sortedData.get(i).setImage(new BitmapDrawable(Resources.getSystem(),drawable_from_url));
 
         }
     }

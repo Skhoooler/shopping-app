@@ -54,51 +54,51 @@ public class AmazonConnect
         Gson gson = new Gson();
         String rawAmazonData = "";
         try {
-        BufferedReader inputBuffer;
+            BufferedReader inputBuffer;
 
             inputBuffer = new BufferedReader(
                     new InputStreamReader(amazonConnection.getInputStream()));
 
-        StringBuilder amazonStringBuilder = new StringBuilder();
+            StringBuilder amazonStringBuilder = new StringBuilder();
 
-        while(true){
+            while(true){
+                try {
+                    if (!((rawAmazonData = inputBuffer.readLine()) != null)) break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                amazonStringBuilder.append(rawAmazonData);
+            }
+            ;
             try {
-                if (!((rawAmazonData = inputBuffer.readLine()) != null)) break;
+                inputBuffer.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            amazonStringBuilder.append(rawAmazonData);
-        }
-            ;
-        try {
-            inputBuffer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
             amazonConnection.disconnect();
-        String responseString = amazonStringBuilder.toString();
+            String responseString = amazonStringBuilder.toString();
 
-        Map<String, Map> nonProductArray;
-        System.out.println(responseString);
-        nonProductArray = gson.fromJson(responseString, Map.class);
-        ArrayList searchResults =(ArrayList) nonProductArray.get("search_results");
+            Map<String, Map> nonProductArray;
+            System.out.println(responseString);
+            nonProductArray = gson.fromJson(responseString, Map.class);
+            ArrayList searchResults =(ArrayList) nonProductArray.get("search_results");
 
-        for (int i = 0; i < searchResults.size(); i++){
-            Product product = new Product();
-            System.out.println("Crashing on index: " + i);
-            Map<String, Map<String, Object>> items1 = (Map<String, Map<String, Object>>) searchResults.get(i);
-            Map<String, Object> items2 = (Map<String, Object>) searchResults.get(i);
-            product.setName(items2.get("title").toString());
-            product.setLink(items2.get("link").toString());
-            product.setPic(items2.get("image").toString());
+            for (int i = 0; i < searchResults.size(); i++){
+                Product product = new Product();
+                System.out.println("Crashing on index: " + i);
+                Map<String, Map<String, Object>> items1 = (Map<String, Map<String, Object>>) searchResults.get(i);
+                Map<String, Object> items2 = (Map<String, Object>) searchResults.get(i);
+                product.setName(items2.get("title").toString());
+                product.setLink(items2.get("link").toString());
+                product.setPic(items2.get("image").toString());
 
-            ArrayList<Map<String, Object>> prices = (ArrayList<Map<String, Object>>) items1.get("prices");
+                ArrayList<Map<String, Object>> prices = (ArrayList<Map<String, Object>>) items1.get("prices");
 
-            Map<String,Object> priceValues = (Map<String,Object>) prices.get(0);
-            System.out.println(prices.get(0));
-            product.setPrice(Float.valueOf(priceValues.get("value").toString()));
-            amazonProducts.add(product);
-        }
+                Map<String,Object> priceValues = (Map<String,Object>) prices.get(0);
+                System.out.println(prices.get(0));
+                product.setPrice(Float.valueOf(priceValues.get("value").toString()));
+                amazonProducts.add(product);
+            }
 
 
 
@@ -109,7 +109,7 @@ public class AmazonConnect
     }
 
     private String constructURL(String query){
-       String finishedURL = urlSample + api_key + '&' +  type + '&' + amazon_domain + getPayloadString();
+        String finishedURL = urlSample + api_key + '&' +  type + '&' + amazon_domain + getPayloadString();
 
         return finishedURL;
     }
