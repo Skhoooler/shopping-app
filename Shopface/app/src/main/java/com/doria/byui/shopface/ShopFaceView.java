@@ -14,21 +14,16 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class ShopFaceView {
-    private ShopFaceControl sort;
-
-
-
     private ArrayList<Product> sortedData;
 
 
-    public ShopFaceView(ArrayList<Product> sortedProducts, String query){
+    public ShopFaceView(ArrayList<Product> sortedProducts){
         sortedData = sortedProducts;
-        imageDecode();
     }
 
-    public void imageDecode(){
+    public ArrayList<Product> imageDecode(){
         String url = "";
-        for (Integer i = 0; i < sortedData.size(); i++){
+        for (int i = 0; i < sortedData.size(); i++){
             if (!sortedData.get(i).getPic().isEmpty())
                 url = sortedData.get(i).getPic();
             Bitmap drawable_from_url;
@@ -58,5 +53,6 @@ public class ShopFaceView {
             sortedData.get(i).setImage(new BitmapDrawable(Resources.getSystem(),drawable_from_url));
 
         }
+        return sortedData;
     }
 }

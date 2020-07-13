@@ -14,6 +14,8 @@ import android.widget.EditText;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.jar.Attributes;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         //uiThread functions
     }
 
-    public void SearchOnClick(View view){
+    public void SearchOnClick(View view) throws InterruptedException {
         EditText searchBox = (EditText)findViewById(R.id.editText);
         final String query = searchBox.getText().toString();
 
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         Thread amazonConnectThread = new Thread(new Runnable() {
             @Override
             public void run(){
-                amazonProducts[0] = new AmazonConnect().search(query);
+                //amazonProducts[0] = new AmazonConnect().search(query);
             }
         });
 
@@ -54,10 +56,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        amazonConnectThread.start();
+       // amazonConnectThread.start();
         ebayConnectThread.start();
 
+        //amazonConnectThread.join();
+        ebayConnectThread.join();
+
+        ArrayList<Product> allProducts = new ArrayList<>();
+        allProducts.addAll(ebayProducts[0]);
+        //allProducts.addAll(amazonProducts[0]);
+
+        ArrayList<Product> sortedProducts = new ShopFaceControl(allProducts).sort(allProducts);
+        ArrayList<Product> processedProducts = new ShopFaceView(sortedProducts).imageDecode();
+
+
         Intent intent = new Intent(this, DisplayResultsActivity.class);
+        intent.putExtra("data", processedProducts);
         startActivity(intent);
     }
 
