@@ -102,7 +102,8 @@ public class EbayConnect implements ConnectStore{
                 {
                     product.setPrice(0);
                 }
-                product.setDesc(null);
+                product.setDesc("");
+                product.setPic(null);
 
                 ebayProducts.add(product);
             }
