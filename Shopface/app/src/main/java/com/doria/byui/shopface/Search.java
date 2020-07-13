@@ -5,9 +5,9 @@ import java.io.File;
 class Search {
     private File file;
 
-    Search(String query){
+    Search(String query, boolean IsEbay){
         System.out.println(query);
-        new Connect(query);
+        new Connect(query, IsEbay);
     }
 
 }

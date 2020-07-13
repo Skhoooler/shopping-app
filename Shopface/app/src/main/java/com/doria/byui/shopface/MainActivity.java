@@ -38,14 +38,20 @@ public class MainActivity extends AppCompatActivity {
         //editor.putString(queryKey, query);
         //editor.commit();
         //System.out.println(sharedPreferences.getString(queryKey, ""));
-
-        Thread connectThread = new Thread(new Runnable() {
+        Thread amazonConnectThread = new Thread(new Runnable() {
             @Override
             public void run(){
-                Search search = new Search(query);
+                Search search = new Search(query, false);
             }
         });
-        connectThread.start();
+        amazonConnectThread.start();
+        Thread ebayConnectThread = new Thread(new Runnable() {
+            @Override
+            public void run(){
+                Search search = new Search(query, true);
+            }
+        });
+       ebayConnectThread.start();
     }
     public  void DeleteOnStop(){
 

@@ -11,25 +11,30 @@ class Connect {
     String query;
     Product[] ebayResults;
 
-    Connect(String queryFromSearchBar)  {
+    Connect(String queryFromSearchBar, boolean isEbay)  {
         query = queryFromSearchBar;
 
+        ArrayList<Product> allProducts = new ArrayList<>();
         // Returns an ArrayList with Products from Ebay
-        EbayConnect ebayConnect          = new EbayConnect();
-        ArrayList<Product> ebayResults   = ebayConnect.search(query, true);
+        if (isEbay) {
+            EbayConnect ebayConnect = new EbayConnect();
+            ArrayList<Product> ebayResults = ebayConnect.search(query, true);
 
+            allProducts.addAll(ebayResults);
+        }
         //Returns an ArrayList with Products from Amazon
-        AmazonConnect amazonConnect = new AmazonConnect();
-
-        ArrayList<Product> amazonResults = amazonConnect.search(query);
-
+        else {
+            AmazonConnect amazonConnect = new AmazonConnect();
+            ArrayList<Product> amazonResults = amazonConnect.search(query);
+            allProducts.addAll(amazonResults);
+            System.out.println("Amazon Items: " + amazonResults.size());
+        }
 
         // Combines all of the products from the ArrayLists into one ArrayList
-        ArrayList<Product> allProducts = new ArrayList<>();
-        allProducts.addAll(ebayResults);
-        allProducts.addAll(amazonResults);
 
-        System.out.println("Amazon Items: " + amazonResults.size());
+
+
+
         // Sorts via Price in descending order (cheapest first)
         Collections.sort(allProducts, new Comparator<Product>() {
             @Override

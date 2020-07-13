@@ -94,6 +94,7 @@ public class AmazonConnect
             ArrayList<Map<String, Object>> prices = (ArrayList<Map<String, Object>>) items1.get("prices");
 
             Map<String,Object> priceValues = (Map<String,Object>) prices.get(0);
+            System.out.println(prices.get(0));
             product.setPrice(Float.valueOf(priceValues.get("value").toString()));
             amazonProducts.add(product);
         }
