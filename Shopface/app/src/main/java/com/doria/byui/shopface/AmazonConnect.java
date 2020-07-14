@@ -63,7 +63,7 @@ public class AmazonConnect
 
             while(true){
                 try {
-                    if (!((rawAmazonData = inputBuffer.readLine()) != null)) break;
+                    if (((rawAmazonData = inputBuffer.readLine()) == null)) break;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -94,9 +94,9 @@ public class AmazonConnect
 
                 ArrayList<Map<String, Object>> prices = (ArrayList<Map<String, Object>>) items1.get("prices");
 
-                Map<String,Object> priceValues = (Map<String,Object>) prices.get(0);
+                Map<String,Object> priceValues = prices.get(0);
                 System.out.println(prices.get(0));
-                product.setPrice(Float.valueOf(priceValues.get("value").toString()));
+                product.setPrice(Float.parseFloat(priceValues.get("value").toString()));
                 amazonProducts.add(product);
             }
 
@@ -109,9 +109,9 @@ public class AmazonConnect
     }
 
     private String constructURL(String query){
-        String finishedURL = urlSample + api_key + '&' +  type + '&' + amazon_domain + getPayloadString();
+        //String finishedURL = urlSample + api_key + '&' +  type + '&' + amazon_domain + getPayloadString();
 
-        return finishedURL;
+        return urlSample + api_key + '&' +  type + '&' + amazon_domain + getPayloadString();
     }
 
     private String getPayloadString() {
