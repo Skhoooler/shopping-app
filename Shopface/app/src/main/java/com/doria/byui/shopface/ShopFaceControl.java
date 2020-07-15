@@ -40,12 +40,8 @@ class ShopFaceControl {
         for (int i = 0; i < allProducts.size(); i++){
             if (allProducts.get(i).getPrice() > range) {
                 sortedProducts.add(allProducts.get(i));
-                System.out.println(allProducts.get(i).getName() + " for $" + allProducts.get(i).getPrice());
             }
         }
-
-        System.out.println("Number of Items: " + allProducts.size());
-        System.out.println("Number of sorted Items: " + sortedProducts.size());
 
         return sortedProducts;
     }
