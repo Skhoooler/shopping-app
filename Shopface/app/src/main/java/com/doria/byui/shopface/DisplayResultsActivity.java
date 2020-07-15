@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.ArrayList;
+
 public class DisplayResultsActivity extends AppCompatActivity {
+    ArrayList<Product> products;
 
     public ShopFaceView displayProducts(String query){
         ShopFaceView view1 = null;
@@ -15,6 +18,7 @@ public class DisplayResultsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        products = (ArrayList<Product>) getIntent().getSerializableExtra("data");
         setContentView(R.layout.activity_display_results);
         super.onPause();
     }
