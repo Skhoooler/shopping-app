@@ -49,12 +49,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <ImageButton
-                android:id="@+id/imageButton"
+            <ImageView
+                android:id="@+id/imageView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:srcCompat="@tools:sample/backgrounds/scenic"
-                android:contentDescription="@string/description" />
+                app:srcCompat="@drawable/background_tile" />
 
             <TextView
                 android:id="@+id/textView2"
