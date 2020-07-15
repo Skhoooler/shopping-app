@@ -2,19 +2,25 @@ package com.doria.byui.shopface;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 public class DisplayResultsActivity extends AppCompatActivity {
     ArrayList<Product> products;
 
-    public ShopFaceView displayProducts(String query){
-        ShopFaceView view1 = null;
-        return view1;
+    public void displayProducts(){
+        int i = 0;
+        Context context = getApplicationContext();
+        ImageView imageview1 = new ImageView(context);
+        imageview1.setImageDrawable(products.get(i).getImage());
+        ImageView img= (ImageView) findViewById(R.id.image);
+        img.setImageResource(R.drawable.imageview1);
     }
 
     @Override
