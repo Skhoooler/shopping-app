@@ -3,7 +3,9 @@ package com.doria.byui.shopface;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 
-class Product {
+import java.io.Serializable;
+
+class Product implements Serializable {
     private String name;
     private float price;
     private String pic;

@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
         //get(null);
     }
 
-    void uiThread(){
-        //uiThread functions
-    }
 
     public void SearchOnClick(View view) throws InterruptedException {
         EditText searchBox = (EditText)findViewById(R.id.editText);
@@ -62,22 +59,28 @@ public class MainActivity extends AppCompatActivity {
         //amazonConnectThread.join();
         ebayConnectThread.join();
 
-        ArrayList<Product> allProducts = new ArrayList<>();
-        allProducts.addAll(ebayProducts[0]);
-        //allProducts.addAll(amazonProducts[0]);
+        Thread processProductsThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<Product> allProducts = new ArrayList<>();
+                allProducts.addAll(ebayProducts[0]);
+                //allProducts.addAll(amazonProducts[0]);
 
-        ArrayList<Product> sortedProducts = new ShopFaceControl(allProducts).sort(allProducts);
-        ArrayList<Product> processedProducts = new ShopFaceView(sortedProducts).imageDecode();
+                ArrayList<Product> sortedProducts = new ShopFaceControl(allProducts).sort(allProducts);
+                ArrayList<Product> processedProducts = new ShopFaceView(sortedProducts).imageDecode();
 
-        for (int i = 0; i < processedProducts.size(); i++){
-            System.out.println(allProducts.get(i).getName() + " for $" + allProducts.get(i).getPrice());
-        }
-        System.out.println("Number of Items: " + allProducts.size());
-        System.out.println("Number of sorted Items: " + sortedProducts.size());
+                for (int i = 0; i < processedProducts.size(); i++){
+                    System.out.println(allProducts.get(i).getName() + " for $" + allProducts.get(i).getPrice());
+                }
+                System.out.println("Number of Items: " + allProducts.size());
+                System.out.println("Number of sorted Items: " + sortedProducts.size());
 
-        Intent intent = new Intent(this, DisplayResultsActivity.class);
-        intent.putExtra("data", processedProducts);
-        //startActivity(intent);
+                Intent intent = new Intent(getBaseContext(), DisplayResultsActivity.class);
+                intent.putExtra("data", processedProducts);
+                startActivity(intent);
+            }});
+
+        processProductsThread.start();
     }
 
     public void DeleteOnStop(){
