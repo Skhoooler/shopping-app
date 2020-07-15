@@ -2,5 +2,7 @@
     <string name="app_name">Shopface</string>
     <string name="search_bar">Product</string>
     <string name="search_button">Search</string>
+    <string name="product_name">Name</string>
     <string name="description">Description</string>
+    <string name="image">Product Image</string>
 </resources>
