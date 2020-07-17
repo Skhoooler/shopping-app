@@ -13,7 +13,7 @@ import android.widget.EditText;
 import java.net.URI;
 import java.util.ArrayList;
 
-public class DisplayResultsActivity extends AppCompatActivity {
+public class DisplayResultsActivity extends AppCompatActivity implements RecyclerViewAdapter.OnNoteListener {
     ArrayList<Product> products;
     RecyclerView recyclerView;
 
@@ -26,7 +26,7 @@ public class DisplayResultsActivity extends AppCompatActivity {
         products = (ArrayList<Product>) getIntent().getSerializableExtra("data");
 
         recyclerView = findViewById(R.id.recyclerView);
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(this, products);
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(this, products, this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recyclerViewAdapter);
@@ -45,12 +45,13 @@ public class DisplayResultsActivity extends AppCompatActivity {
     */
     }
 
-    public void onClickProduct(View view){
+    @Override
+    public void onNoteClick(int position) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-                Uri.parse(products.get(recyclerView.getChildLayoutPosition(view)).getLink()));
-        System.out.println("Product has been Clicked");
+                Uri.parse(products.get(position).getLink()));
         startActivity(browserIntent);
     }
+
 
     // Copy Pasted from MainActivity with a few modifications
     public void onClickSearch(View view) throws InterruptedException {
@@ -98,7 +99,4 @@ public class DisplayResultsActivity extends AppCompatActivity {
     }
 
 
-    void onClickBack(View view){
-
-    }
 }
