@@ -62,12 +62,12 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<Product> sortedProducts = new ShopFaceControl(allProducts).sort(allProducts);
                 ArrayList<Product> processedProducts = new ShopFaceView(sortedProducts).imageDecode();
 
-                for (int i = 0; i < processedProducts.size(); i++){
+            /*    for (int i = 0; i < processedProducts.size(); i++){
                     System.out.println(allProducts.get(i).getName() + " for $" + allProducts.get(i).getPrice());
                 }
                 System.out.println("Number of Items: " + allProducts.size());
                 System.out.println("Number of sorted Items: " + sortedProducts.size());
-
+*/
                 Intent intent = new Intent(getBaseContext(), DisplayResultsActivity.class);
                 intent.putExtra("data", processedProducts);
                 startActivity(intent);

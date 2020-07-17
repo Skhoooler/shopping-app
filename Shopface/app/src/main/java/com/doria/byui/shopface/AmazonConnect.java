@@ -79,13 +79,13 @@ public class AmazonConnect
             String responseString = amazonStringBuilder.toString();
 
             Map<String, Map> nonProductArray;
-            System.out.println(responseString);
+           // System.out.println(responseString);
             nonProductArray = gson.fromJson(responseString, Map.class);
             ArrayList searchResults =(ArrayList) nonProductArray.get("search_results");
 
             for (int i = 0; i < searchResults.size(); i++){
                 Product product = new Product();
-                System.out.println("Crashing on index: " + i);
+                //System.out.println("Crashing on index: " + i);
                 Map<String, Map<String, Object>> items1 = (Map<String, Map<String, Object>>) searchResults.get(i);
                 Map<String, Object> items2 = (Map<String, Object>) searchResults.get(i);
                 product.setName(items2.get("title").toString());
@@ -95,7 +95,7 @@ public class AmazonConnect
                 ArrayList<Map<String, Object>> prices = (ArrayList<Map<String, Object>>) items1.get("prices");
 
                 Map<String,Object> priceValues = prices.get(0);
-                System.out.println(prices.get(0));
+               // System.out.println(prices.get(0));
                 product.setPrice(Float.parseFloat(priceValues.get("value").toString()));
                 amazonProducts.add(product);
             }

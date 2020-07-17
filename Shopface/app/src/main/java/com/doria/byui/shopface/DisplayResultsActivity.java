@@ -5,10 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 public class DisplayResultsActivity extends AppCompatActivity {
@@ -44,7 +46,10 @@ public class DisplayResultsActivity extends AppCompatActivity {
     }
 
     public void onClickProduct(View view){
-
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse(products.get(recyclerView.getChildLayoutPosition(view)).getLink()));
+        System.out.println("Product has been Clicked");
+        startActivity(browserIntent);
     }
 
     // Copy Pasted from MainActivity with a few modifications
@@ -91,6 +96,8 @@ public class DisplayResultsActivity extends AppCompatActivity {
 
         processProductsThread.start();
     }
+
+
     void onClickBack(View view){
 
     }
