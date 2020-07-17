@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         Thread amazonConnectThread = new Thread(new Runnable() {
             @Override
             public void run(){
-                //amazonProducts[0] = new AmazonConnect().search(query);
+            //    amazonProducts[0] = new AmazonConnect().search(query);
             }
         });
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
        // amazonConnectThread.start();
         ebayConnectThread.start();
 
-        //amazonConnectThread.join();
+       // amazonConnectThread.join();
         ebayConnectThread.join();
 
         Thread processProductsThread = new Thread(new Runnable() {
