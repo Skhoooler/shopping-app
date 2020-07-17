@@ -58,8 +58,8 @@ public class DisplayResultsActivity extends AppCompatActivity implements Recycle
 
     // Copy Pasted from MainActivity with a few modifications
     public void onClickSearch(View view) throws InterruptedException {
-        EditText searchBox = (EditText)findViewById(R.id.editText);
-        final String query = searchBox.getText().toString();
+        EditText searchBox = (EditText)findViewById(R.id.DisplayResults_Search);
+        String query = searchBox.getText().toString();
         Intent intent = new Intent(getBaseContext(), SearchActivity.class);
         intent.putExtra("query", query);
         startActivity(intent);

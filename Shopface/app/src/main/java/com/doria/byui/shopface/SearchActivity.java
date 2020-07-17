@@ -52,10 +52,9 @@ public class SearchActivity extends AppCompatActivity {
                 allProducts.addAll(amazonProducts[0]);
 
                 ArrayList<Product> sortedProducts = new ShopFaceControl(allProducts).sort(allProducts);
-                ArrayList<Product> processedProducts = new ShopFaceView(sortedProducts).imageDecode();
 
                 Intent intent = new Intent(getBaseContext(), DisplayResultsActivity.class);
-                intent.putExtra("data", processedProducts);
+                intent.putExtra("data", sortedProducts);
                 startActivity(intent);
             }});
 

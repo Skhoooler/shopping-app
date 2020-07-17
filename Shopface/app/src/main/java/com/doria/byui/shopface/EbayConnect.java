@@ -33,6 +33,7 @@ public class EbayConnect implements ConnectStore{
 
         // Puts together the API request
         ebayRequest = constructSandboxAPICall(opName);
+        //ebayRequest = constructAPICall(opName);
 
         //HashMap<Integer, Product> ebayProducts = new HashMap<Integer, Product>();
         ArrayList<Product> ebayProducts = new ArrayList<>();
@@ -104,6 +105,7 @@ public class EbayConnect implements ConnectStore{
                 link.deleteCharAt(0);
                 link.deleteCharAt(link.length() - 1);
                 product.setLink(link.toString());
+
 
                 if (currentPriceMap.get("__value__") != null) {
                     product.setPrice((float) Float.parseFloat((String) currentPriceMap.get("__value__")));
