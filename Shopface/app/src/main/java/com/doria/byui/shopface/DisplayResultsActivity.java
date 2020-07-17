@@ -23,30 +23,33 @@ public class DisplayResultsActivity extends AppCompatActivity implements Recycle
         setContentView(R.layout.activity_display_results);
         super.onPause();
 
-        products = (ArrayList<Product>) getIntent().getSerializableExtra("data");
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                products = (ArrayList<Product>) getIntent().getSerializableExtra("data");
+                products = new ShopFaceView(products).imageDecode();
+            }
+        });
+
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         recyclerView = findViewById(R.id.recyclerView);
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(this, products, this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recyclerViewAdapter);
-
-        //displayProducts();
     }
 
-    public void displayProducts(){
-
-        /* int i = 0;
-        Context context = getApplicationContext();
-        ImageView imageview1 = new ImageView(context);
-        imageview1.setImageDrawable(products.get(i).getImage());
-        ImageView img= (ImageView) findViewById(R.id.image);
-        img.setImageResource(R.drawable.imageview1);
-    */
-    }
 
     @Override
     public void onNoteClick(int position) {
+        System.out.println(products.get(position).getLink());
         Intent browserIntent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse(products.get(position).getLink()));
         startActivity(browserIntent);
