@@ -69,7 +69,5 @@ public class MainActivity extends AppCompatActivity {
         processProductsThread.start();
     }
 
-    public void DeleteOnStop(){
 
-    }
 }
