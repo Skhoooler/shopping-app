@@ -14,6 +14,11 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         query = (String) getIntent().getSerializableExtra("query");
+        try {
+            Search();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     public void Search() throws InterruptedException {
 
