@@ -29,44 +29,10 @@ public class MainActivity extends AppCompatActivity {
     public void SearchOnClick(View view) throws InterruptedException {
         EditText searchBox = (EditText)findViewById(R.id.editText);
         final String query = searchBox.getText().toString();
+        Intent intent = new Intent(getBaseContext(), SearchActivity.class);
+        intent.putExtra("query", query);
+        startActivity(intent);
 
-        final ArrayList[] amazonProducts = new ArrayList[]{new ArrayList<>()};
-        Thread amazonConnectThread = new Thread(new Runnable() {
-            @Override
-            public void run(){
-                //amazonProducts[0] = new AmazonConnect().search(query);
-            }
-        });
-
-        final ArrayList[] ebayProducts = new ArrayList[]{new ArrayList<>()};
-        Thread ebayConnectThread = new Thread(new Runnable() {
-            @Override
-            public void run(){
-                ebayProducts[0] = new EbayConnect().search(query);
-            }
-        });
-
-        //amazonConnectThread.start();
-        ebayConnectThread.start();
-
-        //amazonConnectThread.join();
-        ebayConnectThread.join();
-
-        Thread processProductsThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                ArrayList<Product> allProducts = new ArrayList<>();
-                allProducts.addAll(ebayProducts[0]);
-                //allProducts.addAll(amazonProducts[0]);
-
-                ArrayList<Product> sortedProducts = new ShopFaceControl(allProducts).sort(allProducts);
-
-                Intent intent = new Intent(getBaseContext(), DisplayResultsActivity.class);
-                intent.putExtra("data", sortedProducts);
-                startActivity(intent);
-            }});
-
-        processProductsThread.start();
     }
 
 
