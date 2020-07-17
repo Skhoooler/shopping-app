@@ -1,7 +1,6 @@
 package com.doria.byui.shopface;
 
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 
 import java.io.Serializable;
 
