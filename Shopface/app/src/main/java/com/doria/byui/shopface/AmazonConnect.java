@@ -1,7 +1,11 @@
 package com.doria.byui.shopface;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import com.google.gson.Gson;
@@ -16,6 +20,7 @@ import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Set;
 
 public class AmazonConnect
 {
@@ -85,18 +90,21 @@ public class AmazonConnect
 
             for (int i = 0; i < searchResults.size(); i++){
                 Product product = new Product();
-                //System.out.println("Crashing on index: " + i);
+
                 Map<String, Map<String, Object>> items1 = (Map<String, Map<String, Object>>) searchResults.get(i);
                 Map<String, Object> items2 = (Map<String, Object>) searchResults.get(i);
                 product.setName(items2.get("title").toString());
                 product.setLink(items2.get("link").toString());
                 product.setPic(items2.get("image").toString());
 
-                ArrayList<Map<String, Object>> prices = (ArrayList<Map<String, Object>>) items1.get("prices");
-
-                Map<String,Object> priceValues = prices.get(0);
-               // System.out.println(prices.get(0));
-                product.setPrice(Float.parseFloat(priceValues.get("value").toString()));
+                ArrayList<Map<String, Object>> prices;
+                prices = (ArrayList<Map<String, Object>>) items1.get("prices");
+                Map<String,Object> priceValues = null;
+                if (prices != null) {
+                    priceValues = prices.get(0);
+                    // System.out.println(prices.get(0));
+                    product.setPrice(Float.parseFloat(priceValues.get("value").toString()));
+                }
                 amazonProducts.add(product);
             }
 
