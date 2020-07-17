@@ -68,11 +68,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             onNoteListener.onNoteClick(getAdapterPosition());
         }
 
-        public int getAdapterPos(){
-            return getAdapterPosition();
-        }
     }
     public interface OnNoteListener{
-        void onNoteClick(int posiition);
+        void onNoteClick(int position);
     }
 }
