@@ -2,21 +2,14 @@ package com.doria.byui.shopface;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.text.Layout;
+
 import android.view.View;
 import android.widget.EditText;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.jar.Attributes;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;

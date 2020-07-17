@@ -4,13 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -46,6 +43,9 @@ public class DisplayResultsActivity extends AppCompatActivity {
     */
     }
 
+    public void onClickProduct(View view){
+
+    }
 
     // Copy Pasted from MainActivity with a few modifications
     public void onClickSearch(View view) throws InterruptedException {
@@ -92,9 +92,6 @@ public class DisplayResultsActivity extends AppCompatActivity {
         processProductsThread.start();
     }
     void onClickBack(View view){
-
-    }
-    void onClickProduct(View view){
 
     }
 }
