@@ -94,8 +94,17 @@ public class EbayConnect implements ConnectStore{
                 ArrayList           currentPrice     = (ArrayList) sellingStatusMap.get("currentPrice"); // Line 82
                 Map<String, Object> currentPriceMap  = (Map<String, Object>) currentPrice.get(0);        // Line 83
 
-                product.setName((String) item.get("title").toString());
-                product.setLink((String) item.get("viewItemURL").toString());
+                StringBuilder name = new StringBuilder(item.get("title").toString());
+                name.deleteCharAt(0);
+                name.deleteCharAt(name.length() - 1);
+                product.setName(name.toString());
+
+                // Gets rid of the brackets outside of the link
+                StringBuilder link = new StringBuilder(item.get("viewItemURL").toString());
+                link.deleteCharAt(0);
+                link.deleteCharAt(link.length() - 1);
+                product.setLink(link.toString());
+
                 if (currentPriceMap.get("__value__") != null) {
                     product.setPrice((float) Float.parseFloat((String) currentPriceMap.get("__value__")));
                 } else

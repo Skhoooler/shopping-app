@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         Thread amazonConnectThread = new Thread(new Runnable() {
             @Override
             public void run(){
-                amazonProducts[0] = new AmazonConnect().search(query);
+                //amazonProducts[0] = new AmazonConnect().search(query);
             }
         });
 
@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        amazonConnectThread.start();
+        //amazonConnectThread.start();
         ebayConnectThread.start();
 
-        amazonConnectThread.join();
+        //amazonConnectThread.join();
         ebayConnectThread.join();
 
         Thread processProductsThread = new Thread(new Runnable() {
@@ -57,19 +57,12 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 ArrayList<Product> allProducts = new ArrayList<>();
                 allProducts.addAll(ebayProducts[0]);
-                allProducts.addAll(amazonProducts[0]);
+                //allProducts.addAll(amazonProducts[0]);
 
                 ArrayList<Product> sortedProducts = new ShopFaceControl(allProducts).sort(allProducts);
-                ArrayList<Product> processedProducts = new ShopFaceView(sortedProducts).imageDecode();
 
-            /*    for (int i = 0; i < processedProducts.size(); i++){
-                    System.out.println(allProducts.get(i).getName() + " for $" + allProducts.get(i).getPrice());
-                }
-                System.out.println("Number of Items: " + allProducts.size());
-                System.out.println("Number of sorted Items: " + sortedProducts.size());
-*/
                 Intent intent = new Intent(getBaseContext(), DisplayResultsActivity.class);
-                intent.putExtra("data", processedProducts);
+                intent.putExtra("data", sortedProducts);
                 startActivity(intent);
             }});
 
